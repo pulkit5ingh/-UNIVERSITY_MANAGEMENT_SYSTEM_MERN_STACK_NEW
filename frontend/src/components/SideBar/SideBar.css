@@ -25,7 +25,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 17.5em;
+  width: 14.5em;
   background: #110070;
 }
 
@@ -38,7 +38,8 @@
 }
 .logo a {
   display: block;
-  padding: 1em 0;
+  padding: 1.65rem 0;
+  font-size: 1.2rem;
   color: #dfdbd9;
   text-decoration: none;
 }
@@ -59,11 +60,11 @@
 .main-nav li {
   border-bottom: solid 0.5px #f1f1f1;
   display: block;
-  padding: 2rem;
-  text-align: right;
+  padding: 1.2rem;
+  text-align: center;
 }
 .main-nav a {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #dfdbd9;
   font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;

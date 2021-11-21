@@ -2,7 +2,7 @@
 .header {
   overflow: hidden;
   background-color: #f1f1f1;
-  padding: 20px 10px;
+  padding: 1rem;
   font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 }
 
@@ -11,12 +11,12 @@
   float: left;
   color: black;
   text-align: center;
-  padding: 8px;
+  padding: 10px;
   text-decoration: none;
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   color: #110070;
 }
 
