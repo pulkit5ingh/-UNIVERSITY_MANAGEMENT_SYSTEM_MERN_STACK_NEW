@@ -26,7 +26,7 @@
   top: 0;
   bottom: 0;
   width: 14.5em;
-  background: #110070;
+  background: #666666;
 }
 
 .logo {
@@ -58,10 +58,13 @@
   border-top: solid 1px #f1f1f1;
 }
 .main-nav li {
-  border-bottom: solid 0.5px #f1f1f1;
+  border-bottom: solid 0.5px #818181;
   display: block;
   padding: 1.2rem;
   text-align: center;
+}
+.main-nav li:hover {
+  background: #3f3f3f;
 }
 .main-nav a {
   font-size: 1.2rem;

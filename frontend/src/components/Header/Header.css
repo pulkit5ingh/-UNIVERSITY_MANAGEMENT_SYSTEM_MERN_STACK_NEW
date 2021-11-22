@@ -42,3 +42,9 @@
 .header-right {
   float: right;
 }
+
+.logout {
+  background-color: rgb(211, 2, 2);
+  color: white;
+  margin-left: 4px;
+}
