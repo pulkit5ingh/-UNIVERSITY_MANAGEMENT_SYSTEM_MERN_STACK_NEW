@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from 'bcryptjs'
 const Schema = mongoose.Schema;
 
 const adminSchema = new mongoose.Schema(
@@ -42,6 +42,23 @@ const adminSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// * Bcrypt 
+
+adminSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.admin_password)
+}
+
+adminSchema.pre('save', async function (next) {
+  if (!this.isModified('admin_password')) {
+    next()
+  }
+
+  const salt = await bcrypt.genSalt(10)
+  this.admin_password = await bcrypt.hash(this.admin_password, salt)
+})
+
+// * ========================
 
 const Admin = mongoose.model("Admin", adminSchema);
 

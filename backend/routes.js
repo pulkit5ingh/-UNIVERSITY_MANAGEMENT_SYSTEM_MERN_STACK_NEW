@@ -4,17 +4,24 @@ const router = express.Router();
 // * import routes
 
 import Admin from "./routes/admin/admin.js";
+import Student from "./routes/student/student.js";
+import Teacher from "./routes/teacher/teacher.js";
+// import User from "./routes/user/user.js";
+// import Cart from "./routes/cart/cart.js";
 
-// * Menu Setup
+// * Admin
 router.use("/", Admin);
 
-// // * Category
-// router.use("/", Category);
+// * Student
+router.use("/", Student);
 
-// // * User
+// * Teacher
+router.use("/", Teacher);
+
+// * User
 // router.use("/", User);
 
-// // * Cart
+// * Cart
 // router.use("/", Cart);
 
 // * DELETE ALL

@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "data:import": "node seeder/seeder.js -i",
+    "data:destroy": "node seeder/seeder.js -d"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
