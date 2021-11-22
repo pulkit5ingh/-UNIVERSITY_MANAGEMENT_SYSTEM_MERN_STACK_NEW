@@ -13,7 +13,7 @@ const getAllStudents = asyncHandler(async (req, res) => {
         const count = await StudentModel.countDocuments();
 
         const data = await StudentModel.find({})
-            .sort({ date: -1 })
+            .sort("-createdAt")
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
@@ -93,6 +93,8 @@ const createStudent = asyncHandler(async (req, res) => {
 
     // * check required fields !
     if (required.length === 0) {
+
+        console.log(req.body)
 
         const {
             student_first_name,

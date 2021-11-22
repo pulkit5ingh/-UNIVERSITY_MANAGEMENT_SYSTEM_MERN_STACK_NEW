@@ -18,11 +18,11 @@ const importData = async () => {
     try {
         // await AdminModel.deleteMany();
         await StudentModel.deleteMany();
-        // await TeacherModel.deleteMany();
+        await TeacherModel.deleteMany();
 
         // await AdminModel.insertMany(AdminData);
         await StudentModel.insertMany(StudentData);
-        // await TeacherModel.insertMany(TeacherData);
+        await TeacherModel.insertMany(TeacherData);
 
         console.log("Data Imported!");
         process.exit();

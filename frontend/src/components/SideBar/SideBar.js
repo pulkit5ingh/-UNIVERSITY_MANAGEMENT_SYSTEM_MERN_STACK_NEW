@@ -12,6 +12,7 @@ const SideBar = () => {
                 <nav class="main-nav" role="navigation">
                     <ul class="unstyled list-hover-slide">
                         <li><Link to="/admin/all-students"><a>STUDENTS</a></Link></li>
+                        <li><Link to="/admin/all-teachers"><a>TEACHERS</a></Link></li>
                         <li><a href="#">Work</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">Blog</a></li>

@@ -3,22 +3,22 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 import './Table.css'
 
-const AllStudentsTable = () => {
+const AllTeachersTable = () => {
 
     // * Use State
-    const [students, setStudents] = useState([])
+    const [teachers, setTeachers] = useState([])
     let [page, setPage] = useState(1);
     let [limit, setLimit] = useState(5);
 
-    const getAllStudents = async () => {
+    const getAllTeachers = async () => {
 
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/students?page=${page}&limit=${limit}`,
+                `http://localhost:5000/api/teachers?page=${page}&limit=${limit}`,
             )
             // alert(JSON.stringify(data))
-            console.log(students)
-            setStudents(data.data.response)
+            console.log(data)
+            setTeachers(data.data.response)
         } catch (error) {
             alert(error)
         }
@@ -33,36 +33,36 @@ const AllStudentsTable = () => {
     };
 
     useEffect(() => {
-        getAllStudents();
+        getAllTeachers();
     }, [page, limit])
 
     return (
         <div className="table-container">
-            <Link className="add-btn" to="/admin/add-student">ADD STUDENT</Link>
+            <Link className="add-btn" to="/admin/add-teacher">ADD TEACHER</Link>
 
             <table>
                 <tr>
                     <th>first name</th>
                     <th>last name</th>
-                    <th>cnic</th>
                     <th>email</th>
                     <th>gender</th>
                     <th>phone number</th>
-                    <th>domicile</th>
+                    <th>qualification</th>
+                    <th>university</th>
                     <th>EDIT</th>
                     <th>DELETE</th>
                     <th>VIEW</th>
                 </tr>
-                {students.map((student, key) => {
+                {teachers.map((teacher, key) => {
                     return (
-                        <tr>
-                            <td>{student.student_first_name}</td>
-                            <td>{student.student_last_name}</td>
-                            <td>{student.student_cnic}</td>
-                            <td>{student.student_email}</td>
-                            <td>{student.student_gender}</td>
-                            <td>{student.student_phone_number}</td>
-                            <td>{student.student_domicile}</td>
+                        <tr key={key}>
+                            <td>{teacher.teacher_first_name}</td>
+                            <td>{teacher.teacher_last_name}</td>
+                            <td>{teacher.teacher_cnic}</td>
+                            <td>{teacher.teacher_email}</td>
+                            <td>{teacher.teacher_gender}</td>
+                            <td>{teacher.teacher_phone_number}</td>
+                            <td>{teacher.teacher_domicile}</td>
                             <td><button className="table-edit-btn">EDIT</button></td>
                             <td><button className="table-delete-btn">DELETE</button></td>
                             <td><button className="table-view-btn">VIEW</button></td>
@@ -80,4 +80,4 @@ const AllStudentsTable = () => {
     )
 }
 
-export default AllStudentsTable
+export default AllTeachersTable

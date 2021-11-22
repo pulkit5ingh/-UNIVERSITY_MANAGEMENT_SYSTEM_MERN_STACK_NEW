@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import './Form.css'
 
-const CreateStudentForm = () => {
+const CreateTeacherForm = () => {
 
     // * use navigate 
     const navigate = useNavigate();
@@ -21,15 +21,17 @@ const CreateStudentForm = () => {
     const onSubmit = async data => {
 
         let formData = {
-            student_first_name: data.first_name,
-            student_last_name: data.last_name,
-            student_cnic: data.cnic,
-            student_email: data.email,
-            student_inter_marks: data.inter_marks,
-            student_gender: data.gender,
-            student_phone_number: data.phone_number,
-            student_domicile: data.domicile,
-            student_password: data.password
+            teacher_first_name: data.first_name,
+            teacher_last_name: data.last_name,
+            teacher_cnic: data.cnic,
+            teacher_email: data.email,
+            teacher_university_name: data.university_name,
+            teacher_qualification: data.qualification,
+            teacher_gender: data.gender,
+            teacher_phone_number: data.phone_number,
+            teacher_domicile: data.domicile,
+            teacher_password: data.password,
+            teacher_cgpa: data.cgpa,
         }
 
         try {
@@ -41,16 +43,17 @@ const CreateStudentForm = () => {
             }
 
             const data = await axios.post(
-                'http://localhost:5000/api/student',
+                'http://localhost:5000/api/teacher',
                 formData,
                 config
             )
 
             console.log(data)
             if (data.data.status === "success") {
-                navigate("/admin/all-students");
+                navigate("/admin/all-teachers");
             } else {
 
+                alert(JSON.stringify(data.data.message))
             }
 
         } catch (error) {
@@ -65,7 +68,7 @@ const CreateStudentForm = () => {
 
     return (
         <div className="container">
-            <h1><b>ADD STUDENT</b></h1>
+            <h1><b>ADD TEACHER</b></h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* //* FIRST NAME */}
                 <label>FIRST NAME</label>
@@ -91,20 +94,32 @@ const CreateStudentForm = () => {
                     {...register("cnic", { required: true })}
                 />
                 <div className="error">{errors.cnic && <span>This field is required</span>}</div>
-                {/* //* INTER MARKS */}
-                <label>INTER MARKS</label>
-                <input type="text" name="inter_marks" placeholder="marks ..."
-                    {...register("inter_marks", { required: true })}
+                {/* //* UNIVERSITY NAME */}
+                <label>UNIVERSITY NAME</label>
+                <input type="text" name="university_name" placeholder="marks ..."
+                    {...register("university_name", { required: true })}
                 />
-                <div className="error">{errors.inter_marks && <span>This field is required</span>}</div>
+                <div className="error">{errors.university_name && <span>This field is required</span>}</div>
                 {/* //* PHONE NUMBER */}
                 <label>PHONE NUMBER</label>
                 <input type="text" name="phone_number" placeholder="phone number ..."
                     {...register("phone_number", { required: true })}
                 />
                 <div className="error">{errors.phone_number && <span>This field is required</span>}</div>
-                {/* //* DOMICILE */}
-                <label>DOMICILE</label>
+                {/* //* qualification */}
+                <label>QUALIFICATION</label>
+                <input type="text" name="qualification" placeholder="qualification ..."
+                    {...register("qualification", { required: true })}
+                />
+                <div className="error">{errors.qualification && <span>This field is required</span>}</div>
+                {/* //* CGPA */}
+                <label>CGPA</label>
+                <input type="text" name="cgpa" placeholder="cgpa ..."
+                    {...register("cgpa", { required: true })}
+                />
+                <div className="error">{errors.cgpa && <span>This field is required</span>}</div>
+                {/* //* DOMISILE */}
+                <label>DOMISILE</label>
                 <input type="text" name="domicile" placeholder="domicile ..."
                     {...register("domicile", { required: true })}
                 />
@@ -133,4 +148,4 @@ const CreateStudentForm = () => {
     )
 }
 
-export default CreateStudentForm
+export default CreateTeacherForm

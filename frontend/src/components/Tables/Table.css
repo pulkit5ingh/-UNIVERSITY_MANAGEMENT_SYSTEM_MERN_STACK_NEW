@@ -2,6 +2,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin-top: 3%;
 }
 
 td,
@@ -16,7 +17,7 @@ tr:nth-child(even) {
 }
 
 .table-container {
-  margin: 3% 4% 4% 20%;
+  margin: 6% 4% 4% 20%;
 }
 
 .table-edit-btn {
@@ -64,4 +65,14 @@ tr:nth-child(even) {
   margin: auto;
   width: 50%;
   padding: 10px;
+}
+
+.add-btn{
+  background-color: rgb(160, 160, 160);
+  color: #000000;
+  border: none;
+  padding: 10px 10px;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 5px;
 }

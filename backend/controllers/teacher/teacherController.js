@@ -13,7 +13,7 @@ const getAllTeachers = asyncHandler(async (req, res) => {
         const count = await TeacherModel.countDocuments();
 
         const data = await TeacherModel.find({})
-            .sort({ date: -1 })
+            .sort("-createdAt")
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
@@ -94,6 +94,8 @@ const createTeacher = asyncHandler(async (req, res) => {
 
     // * check required fields !
     if (required.length === 0) {
+
+        console.log(req.body)
 
         const {
             teacher_first_name,
