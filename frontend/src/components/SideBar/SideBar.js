@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './SideBar.css'
 
 const SideBar = () => {
@@ -10,7 +11,7 @@ const SideBar = () => {
             <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
                     <ul class="unstyled list-hover-slide">
-                        <li><a href="#">About</a></li>
+                        <li><Link to="/admin/all-students"><a>STUDENTS</a></Link></li>
                         <li><a href="#">Work</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">Blog</a></li>

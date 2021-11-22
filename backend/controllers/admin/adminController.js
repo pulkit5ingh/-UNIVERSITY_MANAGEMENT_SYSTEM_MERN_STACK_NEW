@@ -133,6 +133,8 @@ const authAdmin = asyncHandler(async (req, res) => {
   // * check required fields !
   if (required.length === 0) {
 
+    console.log(req.body)
+
     const { admin_email, admin_password } = req.body
 
     const admin = await AdminModel.findOne({ admin_email })
@@ -152,7 +154,7 @@ const authAdmin = asyncHandler(async (req, res) => {
       })
     } else {
       res.status(401).json({
-        status: "success",
+        status: "fail",
         response: null,
         message: "Invalid email or password"
       })

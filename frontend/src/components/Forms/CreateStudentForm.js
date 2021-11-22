@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
-import { login } from '../../redux/actions/adminAction'
-import './LoginForm.css'
+import './Form.css'
 
-const LoginForm = () => {
+const CreateStudentForm = () => {
 
     // * use navigate 
     const navigate = useNavigate();
 
-    // * Use Dispatch Initialization
-    const dispatch = useDispatch()
-
-    // * ==== get user state 
-    const adminLogin = useSelector((state) => state.adminLogin)
-    const { loading, error, userInfo, message } = adminLogin;
-
     // * USE EFFECT REDIRECT TO DASH BOARD 
     useEffect(() => {
-        if (userInfo) {
-            navigate("/admin/dashboard");
-        }
-    }, [navigate, userInfo])
+
+    }, [])
 
     // * ========================
 
@@ -30,45 +19,52 @@ const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
-        dispatch(login(data.email, data.password))
     };
 
     console.log(watch("example")); // watch input value by passing the name of it
-
 
     return (
         <div className="container">
             <h1><b>LOG IN</b></h1>
             <form onSubmit={handleSubmit(onSubmit)}>
+                {/* EMAIL */}
+                <label>FIRST NAME</label>
+                <input type="first_name" name="first_name" placeholder="Your first_name ..."
+                    {...register("first_name", { required: true })}
+                />
+                {/* EMAIL */}
+                <label>LAST NAME</label>
+                <input type="last_name" name="last_name" placeholder="Your last name ..."
+                    {...register("last_name", { required: true })}
+                />
+                {/* EMAIL */}
                 <label for="fname">EMAIL</label>
                 <input type="email" name="email" placeholder="Your Email ..."
                     {...register("email", { required: true })}
                 />
                 <div className="error">{errors.email && <span>This field is required</span>}</div>
+                {/* password */}
                 <label for="lname">PASSWORD</label>
                 <input type="password" name="password" placeholder="Your Password ..."
                     {...register("password", { required: true })}
                 />
                 <div className="error">{errors.password && <span>This field is required</span>}</div>
 
-                <label>YOU ARE ?</label>
-                <select name="access_as"
-                    {...register("access_as")}
+                {/* GENDER */}
+                <label>GENDER</label>
+                <select name="gender"
+                    {...register("gender")}
                 >
-                    <option value="student">STUDENT</option>
-                    <option value="teacher">TEACHER</option>
-                    <option value="admin">ADMIN</option>
+                    <option value="male">MALE</option>
+                    <option value="female">FEMALE</option>
+                    <option value="others">OTHERS</option>
                 </select>
 
                 <input type="submit" value="Submit" />
-
-                {error ? <>
-                    <div className="error-alert">IN CORRECT CREDENTIALS !</div>
-                </> : <></>}
 
             </form>
         </div>
     )
 }
 
-export default LoginForm
+export default CreateStudentForm

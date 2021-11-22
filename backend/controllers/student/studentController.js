@@ -18,6 +18,8 @@ const getAllStudents = asyncHandler(async (req, res) => {
             .skip((page - 1) * limit)
             .exec();
 
+        console.log(data)
+
         res.status(201).json({
             status: "success",
             message: "all students",
