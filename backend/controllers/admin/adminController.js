@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import generateToken from '../../configs/jwt/generateToken.js'
 import AdminModel from "../../models/admin/admin.js";
 
 // * =================================================================================
@@ -116,4 +117,59 @@ const createAdmin = asyncHandler(async (req, res) => {
 
 // * =================================================================================
 
-export { getAdmin, getAdminById, createAdmin, deleteAdmin };
+// * @desc    Auth admin & get token
+// * @route   POST /api/admin/login
+// * @access  Public
+const authAdmin = asyncHandler(async (req, res) => {
+
+  // * required array
+  let required = [];
+
+  if (!req.body.admin_email)
+    required.push("admin_email");
+  if (!req.body.admin_password)
+    required.push("admin_password");
+
+  // * check required fields !
+  if (required.length === 0) {
+
+    const { admin_email, admin_password } = req.body
+
+    const admin = await AdminModel.findOne({ admin_email })
+
+    if (admin && (await admin.matchPassword(admin_password))) {
+      res.json({
+        status: "success",
+        response: {
+          _id: admin._id,
+          admin_first_name: admin.admin_first_name,
+          admin_last_name: admin.admin_last_name,
+          admin_email: admin.admin_email,
+          isAdmin: true,
+          token: generateToken(admin._id),
+        },
+        message: "Authentication Succesfull"
+      })
+    } else {
+      res.status(401).json({
+        status: "success",
+        response: null,
+        message: "Invalid email or password"
+      })
+    }
+  } else {
+    // * mapping the required array list
+    let message = required.map((item) => {
+      return " " + item;
+    });
+    res.json({
+      status: "fail",
+      message: "Following fields are required - " + message,
+      response: [],
+    });
+  }
+})
+
+// * =================================================================================
+
+export { getAdmin, getAdminById, createAdmin, deleteAdmin, authAdmin };
