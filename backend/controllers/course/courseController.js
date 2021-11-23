@@ -185,6 +185,57 @@ const updateCourse = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    Update a student
+// * @route   PUT /api/students/:id
+// * @access  Private/Admin
+const pushStudentToCourse = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { student_id } = req.body
+
+    console.log(req.body)
+
+    try {
+
+        // * Lets Check if Student is Already in array 
+
+        let findStudent = await CourseModel.findOne({ _id: id });
+
+        console.log(findStudent.course_assigned_students)
+
+        let isStudent = findStudent.course_assigned_students.includes(student_id);
+
+        if (isStudent) {
+            res.status(404).json({
+                status: "fail",
+                message: "student is already present !",
+                response: error,
+            });
+        } else {
+            const data = await CourseModel.findByIdAndUpdate({ _id: id },
+                { $push: { course_assigned_students: student_id } },
+                {
+                    new: true,
+                    runValidators: true,
+                })
+
+            res.status(201).json({
+                status: "success",
+                message: "Student updated",
+                response: data,
+            });
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "something went wrong",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
 // * @desc    delete a student
 // * @route   DELETE /api/student
 // * @access  Private/Admin
@@ -216,6 +267,7 @@ export {
     deleteCourse,
     createCourse,
     updateCourse,
+    pushStudentToCourse
 };
 
 // * =========================================================== //

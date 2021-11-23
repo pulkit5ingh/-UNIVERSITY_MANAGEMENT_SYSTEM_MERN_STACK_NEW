@@ -9,6 +9,7 @@ import {
     deleteCourse,
     createCourse,
     updateCourse,
+    pushStudentToCourse
 } from "../../controllers/course/courseController.js";
 
 // *=======================================================================================//
@@ -25,7 +26,11 @@ router.route("/course/:id").get(getCourse);
 
 // *=======================================================================================//
 
-router.route("/course/:id").put(updateCourse);
+router.route("/course/:id").put(updateCourse)
+
+// *=======================================================================================//
+
+router.route("/add_student_to_course/:id").put(pushStudentToCourse)
 
 // *=======================================================================================//
 
