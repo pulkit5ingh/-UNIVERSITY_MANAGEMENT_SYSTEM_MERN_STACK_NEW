@@ -11,11 +11,10 @@ const SideBar = () => {
             <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
                     <ul class="unstyled list-hover-slide">
+                        <li><Link to="/admin/dashboard"><a>DASHBOARD</a></Link></li>
+                        <li><Link to="/admin/profile"><a>PROFILE</a></Link></li>
                         <li><Link to="/admin/all-students"><a>STUDENTS</a></Link></li>
                         <li><Link to="/admin/all-teachers"><a>TEACHERS</a></Link></li>
-                        <li><a href="#">Work</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Blog</a></li>
                     </ul>
                 </nav>
             </div>

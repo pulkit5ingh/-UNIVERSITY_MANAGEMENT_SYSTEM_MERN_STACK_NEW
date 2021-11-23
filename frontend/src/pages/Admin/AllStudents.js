@@ -1,5 +1,5 @@
 import React from 'react'
-import SideBar from '../../components/SideBar/SideBar'
+import AdminSideBar from '../../components/SideBar/AdminSideBar'
 import Header from '../../components/Header/Header'
 import AllStudentsTable from '../../components/Tables/AllStudentsTable'
 
@@ -7,7 +7,7 @@ const AllStudents = () => {
     return (
         <div>
             <Header />
-            <SideBar />
+            <AdminSideBar />
             <AllStudentsTable />
         </div>
     )
