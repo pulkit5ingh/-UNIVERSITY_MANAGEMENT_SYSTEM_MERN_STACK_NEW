@@ -6,7 +6,7 @@ const router = express.Router();
 import Admin from "./routes/admin/admin.js";
 import Student from "./routes/student/student.js";
 import Teacher from "./routes/teacher/teacher.js";
-// import User from "./routes/user/user.js";
+import Course from "./routes/course/course.js";
 // import Cart from "./routes/cart/cart.js";
 
 // * Admin
@@ -18,8 +18,8 @@ router.use("/", Student);
 // * Teacher
 router.use("/", Teacher);
 
-// * User
-// router.use("/", User);
+// * course
+router.use("/", Course);
 
 // * Cart
 // router.use("/", Cart);

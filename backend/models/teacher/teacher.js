@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const teacehrSchema = new mongoose.Schema(
+const teacherSchema = new mongoose.Schema(
     {
         // * ok ============================
 
@@ -81,6 +81,6 @@ const teacehrSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Teacehr = mongoose.model("Teacehr", teacehrSchema);
+const Teacher = mongoose.model("Teacher", teacherSchema);
 
-export default Teacehr;
+export default Teacher;
