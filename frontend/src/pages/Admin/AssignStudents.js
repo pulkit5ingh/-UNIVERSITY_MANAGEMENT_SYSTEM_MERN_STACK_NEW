@@ -42,6 +42,7 @@ const AssignStudents = () => {
     //* get all teachers
     const getAllStudents = async () => {
         try {
+            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGg")
             const data = await axios.get(
                 `http://localhost:5000/api/students?page=1&limit=100`,
             )
@@ -70,8 +71,8 @@ const AssignStudents = () => {
         )
         console.log(data)
         if (data.data.status === "success") {
-            // window.location.reload(false);
-            getCourse();
+            window.location.reload(false);
+            // getAllStudents();
             // navigate(`/admin/courses`);
         } else {
             alert(JSON.stringify(data.data.message))
@@ -97,9 +98,11 @@ const AssignStudents = () => {
         )
         console.log(data)
         if (data.data.status === "success") {
-            // window.location.reload(false);
+            // getCourse();
+            // getAllStudents();
+            window.location.reload(false);
             // navigate(`courses/assign-student/${id}`);
-            getCourse();
+            // getAllStudents();
         } else {
             alert(JSON.stringify(data.data.message))
         }
@@ -111,7 +114,7 @@ const AssignStudents = () => {
         updateCourse(data)
     }
 
-    const onRemoveSubmit = async data => {
+    const onRemoveSubmit = data => {
         // console.log(data.id)
         deleteStudent(data)
     }

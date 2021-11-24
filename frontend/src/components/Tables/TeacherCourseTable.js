@@ -54,7 +54,6 @@ const TeacherCourseTable = () => {
                                     <span style={{ padding: "5px", borderBottom: "solid red 3px" }}>TEAHCER NOT ASSIGNED</span>
                                 </> : <>
                                     {course.course_assigned_students ? <>
-
                                         {course.course_assigned_students.map((student, index) => {
                                             return (
                                                 <div key={index} style={{ marginTop: "5px", padding: "2px", borderBottom: "solid gray 3px",}}>
@@ -67,9 +66,7 @@ const TeacherCourseTable = () => {
                                         })
                                         }
                                     </> : <></>}
-
                                 </>}
-
                             </td>
                         </tr>
                     )
