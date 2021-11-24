@@ -10,7 +10,9 @@ import {
     createCourse,
     updateCourse,
     pushStudentToCourse,
-    popStudentToCourse
+    popStudentToCourse,
+    getStudentCourses,
+    getTeacherCourses
 } from "../../controllers/course/courseController.js";
 
 // *=======================================================================================//
@@ -24,6 +26,14 @@ router.route("/courses/:year/:semester").get(getAllCourse);
 // *=======================================================================================//
 
 router.route("/course/:id").get(getCourse);
+
+// *=======================================================================================//
+
+router.route("/student_courses/:student_id").get(getStudentCourses);
+
+// *=======================================================================================//
+
+router.route("/teacher_courses/:teacher_id").get(getTeacherCourses);
 
 // *=======================================================================================//
 

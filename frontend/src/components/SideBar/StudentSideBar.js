@@ -11,9 +11,9 @@ const StudentSideBar = () => {
             <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
                     <ul class="unstyled list-hover-slide">
+                        <li><Link to="/student/dashboard"><a>DASHBOARD</a></Link></li>
                         <li><Link to="/student/profile"><a>PROFILE</a></Link></li>
-                        <li><Link to="/admin/all-students"><a>STUDENTS</a></Link></li>
-                        <li><Link to="/admin/all-teachers"><a>TEACHERS</a></Link></li>
+                        <li><Link to="/student/courses"><a>COURSES</a></Link></li>
                     </ul>
                 </nav>
             </div>

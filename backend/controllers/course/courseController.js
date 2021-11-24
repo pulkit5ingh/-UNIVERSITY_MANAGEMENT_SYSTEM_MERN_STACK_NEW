@@ -238,7 +238,6 @@ const pushStudentToCourse = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
-
 // * @desc    Update a student
 // * @route   PUT /api/students/:id
 // * @access  Private/Admin
@@ -268,6 +267,70 @@ const popStudentToCourse = asyncHandler(async (req, res) => {
         res.status(404).json({
             status: "fail",
             message: "something went wrong",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
+// * @desc    get all student courses
+// * @route   GET /api/
+// * @access  Public
+const getStudentCourses = asyncHandler(async (req, res) => {
+    const { student_id } = req.params;
+
+    console.log(student_id)
+
+    try {
+        const data = await CourseModel.find({
+            course_assigned_students: student_id
+        }).populate("course_assigned_teacher")
+
+        console.log(data)
+
+        res.status(201).json({
+            status: "success",
+            message: "course",
+            response: data,
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "course not found",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
+// * @desc    get all teacher courses
+// * @route   GET /api/
+// * @access  Public
+const getTeacherCourses = asyncHandler(async (req, res) => {
+    const { teacher_id } = req.params;
+
+    console.log(teacher_id)
+
+    try {
+        const data = await CourseModel.find({
+            course_assigned_teacher: teacher_id
+        }).populate("course_assigned_teacher").populate("course_assigned_students")
+
+        console.log(data)
+
+        res.status(201).json({
+            status: "success",
+            message: "course",
+            response: data,
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "course not found",
             response: error,
         });
     }
@@ -307,7 +370,9 @@ export {
     createCourse,
     updateCourse,
     pushStudentToCourse,
-    popStudentToCourse
+    popStudentToCourse,
+    getStudentCourses,
+    getTeacherCourses
 };
 
 // * =========================================================== //

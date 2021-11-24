@@ -20,10 +20,12 @@ import AdminAssignStudents from "./pages/Admin/AssignStudents";
 // * Teacher pages 
 import TeacherDashboard from "./pages/Teacher/Dashboard";
 import TeacherProfile from "./pages/Teacher/Profile";
+import TeacherCourses from "./pages/Teacher/TeacherCourses";
 
 // * Student Pages
 import StudentDashboard from "./pages/Student/Dashboard";
 import StudentProfile from "./pages/Student/Profile";
+import StudentCourses from "./pages/Student/StudentCourses";
 
 const App = () => {
   return (
@@ -47,10 +49,12 @@ const App = () => {
           <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
           <Route path="/teacher/profile" element={<TeacherProfile />} />
           <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route path="/teacher/courses" element={<TeacherCourses />} />
 
           {/* //* Student  */}
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/student/profile" element={<StudentProfile />} />
+          <Route path="/student/courses" element={<StudentCourses />} />
 
         </Route>
       </Routes>

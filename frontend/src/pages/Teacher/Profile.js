@@ -1,12 +1,12 @@
 import React from 'react'
-import AdminSideBar from '../../components/SideBar/AdminSideBar'
+import TeacherSideBar from '../../components/SideBar/TeacherSideBar'
 import Header from '../../components/Header/Header'
 
 const Profile = () => {
     return (
         <div>
             <Header />
-            <AdminSideBar />
+            <TeacherSideBar />
             <div className="dashboard-container">
                 <div class="row">
                     <div class="card">
