@@ -15,6 +15,7 @@ import CreateTeacher from "./pages/Admin/CreateTeacher";
 import AdminProfile from "./pages/Admin/Profile";
 import AdminCourses from "./pages/Admin/Courses";
 import AdminAssignTeacher from "./pages/Admin/AssignTeacher";
+import AdminAssignStudents from "./pages/Admin/AssignStudents";
 
 // * Teacher pages 
 import TeacherDashboard from "./pages/Teacher/Dashboard";
@@ -33,6 +34,7 @@ const App = () => {
 
           {/* //* Admin  */}
           <Route path="/admin/courses/assign-teacher/:id" element={<AdminAssignTeacher />} />
+          <Route path="/admin/courses/assign-student/:id" element={<AdminAssignStudents />} />
           <Route path="/admin/all-students" exact element={<AllStudents />} />
           <Route path="/admin/all-teachers" exact element={<AllTeachers />} />
           <Route path="/admin/add-student" element={<CreateStudent />} />

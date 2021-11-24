@@ -8,11 +8,9 @@ import CourseModel from "../../models/course/course.js";
 // * @access  Public
 const getAllCourse = asyncHandler(async (req, res) => {
     // const { year, semester } = req.params;
-
     console.log(req.params)
 
     try {
-
         let year = parseInt(req.params.year);
         let semester = parseInt(req.params.semester);
 
@@ -49,7 +47,9 @@ const getCourse = asyncHandler(async (req, res) => {
     console.log(id)
 
     try {
-        const data = await CourseModel.findById({ _id: req.params.id }).populate("course_assigned_teacher")
+        const data = await CourseModel.findById({ _id: req.params.id })
+            .populate("course_assigned_teacher")
+            .populate("course_assigned_students")
 
         console.log(data)
 
@@ -200,12 +200,14 @@ const pushStudentToCourse = asyncHandler(async (req, res) => {
 
         let findStudent = await CourseModel.findOne({ _id: id });
 
-        console.log(findStudent.course_assigned_students)
+        console.log("ALL STUDENTS => ", findStudent.course_assigned_students)
 
         let isStudent = findStudent.course_assigned_students.includes(student_id);
 
+        console.log("IS STUDENT => ", isStudent)
+
         if (isStudent) {
-            res.status(404).json({
+            res.status(200).json({
                 status: "fail",
                 message: "student is already present !",
                 response: error,
@@ -224,6 +226,43 @@ const pushStudentToCourse = asyncHandler(async (req, res) => {
                 response: data,
             });
         }
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "something went wrong",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
+
+// * @desc    Update a student
+// * @route   PUT /api/students/:id
+// * @access  Private/Admin
+const popStudentToCourse = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { student_id } = req.body
+
+    console.log(req.body)
+
+    try {
+
+        const data = await CourseModel.findOneAndUpdate({ _id: id },
+            { $pull: { course_assigned_students: student_id } },
+            {
+                new: true,
+                runValidators: true,
+            })
+
+        res.status(201).json({
+            status: "success",
+            message: "Student updated",
+            response: data,
+        });
+
 
     } catch (error) {
         res.status(404).json({
@@ -267,7 +306,8 @@ export {
     deleteCourse,
     createCourse,
     updateCourse,
-    pushStudentToCourse
+    pushStudentToCourse,
+    popStudentToCourse
 };
 
 // * =========================================================== //

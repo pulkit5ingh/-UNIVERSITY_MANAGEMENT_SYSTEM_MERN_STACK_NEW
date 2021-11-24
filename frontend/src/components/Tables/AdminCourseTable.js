@@ -96,7 +96,7 @@ const AdminCourseTable = () => {
                                     <td>{course.course_year}</td>
                                     <td>{course.course_semester}</td>
                                     <td><button className="table-edit-btn"><Link to={`/admin/courses/assign-teacher/${course._id}`}>Assign teacher</Link></button></td>
-                                    <td><button className="table-edit-btn">Assign student</button></td>
+                                    <td><button className="table-edit-btn"><Link to={`/admin/courses/assign-student/${course._id}`}>Assign student</Link></button></td>
                                     <td><button className="table-view-btn">VIEW</button></td>
                                 </tr>
                             )
