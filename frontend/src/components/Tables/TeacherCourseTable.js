@@ -17,7 +17,7 @@ const TeacherCourseTable = () => {
         try {
             const data = await axios.get(
                 // `http://localhost:5000/api/teacher_courses${id}`,
-                `http://localhost:5000/api/teacher_courses/619d30c606e2a9aac05afb6e`,
+                `http://localhost:5000/api/teacher_courses/619fbabebd201cf406570743`,
             )
             console.log(data)
             setCourses(data.data.response)

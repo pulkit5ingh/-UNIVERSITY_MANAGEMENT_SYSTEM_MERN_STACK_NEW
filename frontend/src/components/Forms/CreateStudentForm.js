@@ -56,9 +56,6 @@ const CreateStudentForm = () => {
         } catch (error) {
 
         }
-
-
-
     };
 
     console.log(watch("example")); // watch input value by passing the name of it

@@ -77,7 +77,6 @@ const AssignTeacher = () => {
             window.location.reload(false);
             navigate(`/admin/courses`);
         } else {
-
             alert(JSON.stringify(data.data.message))
         }
 

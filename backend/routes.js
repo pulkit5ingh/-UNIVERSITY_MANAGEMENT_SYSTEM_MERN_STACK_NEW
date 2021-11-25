@@ -7,7 +7,7 @@ import Admin from "./routes/admin/admin.js";
 import Student from "./routes/student/student.js";
 import Teacher from "./routes/teacher/teacher.js";
 import Course from "./routes/course/course.js";
-// import Cart from "./routes/cart/cart.js";
+import Attendance from "./routes/attendance/attendance.js";
 
 // * Admin
 router.use("/", Admin);
@@ -22,7 +22,7 @@ router.use("/", Teacher);
 router.use("/", Course);
 
 // * Cart
-// router.use("/", Cart);
+router.use("/", Attendance);
 
 // * DELETE ALL
 // router.use("/", require("./routes/delete/client_user_delete_all"));

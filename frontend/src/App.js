@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 // * Pages
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
+
 // * Admin pages
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AllStudents from "./pages/Admin/AllStudents";
@@ -21,11 +22,13 @@ import AdminAssignStudents from "./pages/Admin/AssignStudents";
 import TeacherDashboard from "./pages/Teacher/Dashboard";
 import TeacherProfile from "./pages/Teacher/Profile";
 import TeacherCourses from "./pages/Teacher/TeacherCourses";
+import TeacherAddAttendance from "./pages/Teacher/TeacherAddAttendance";
 
 // * Student Pages
 import StudentDashboard from "./pages/Student/Dashboard";
 import StudentProfile from "./pages/Student/Profile";
 import StudentCourses from "./pages/Student/StudentCourses";
+import StudentAttendanceTable from "./pages/Student/StudentAttendanceTable";
 
 const App = () => {
   return (
@@ -50,11 +53,13 @@ const App = () => {
           <Route path="/teacher/profile" element={<TeacherProfile />} />
           <Route path="/teacher/profile" element={<TeacherProfile />} />
           <Route path="/teacher/courses" element={<TeacherCourses />} />
+          <Route path="/teacher/add-attendance" element={<TeacherAddAttendance />} />
 
           {/* //* Student  */}
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/courses" element={<StudentCourses />} />
+          <Route path="/student/attendance" element={<StudentAttendanceTable />} />
 
         </Route>
       </Routes>

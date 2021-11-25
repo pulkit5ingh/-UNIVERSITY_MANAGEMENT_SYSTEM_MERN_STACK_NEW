@@ -14,6 +14,7 @@ const StudentSideBar = () => {
                         <li><Link to="/student/dashboard"><a>DASHBOARD</a></Link></li>
                         <li><Link to="/student/profile"><a>PROFILE</a></Link></li>
                         <li><Link to="/student/courses"><a>COURSES</a></Link></li>
+                        <li><Link to="/student/attendance"><a>ATTENDANCE</a></Link></li>
                     </ul>
                 </nav>
             </div>

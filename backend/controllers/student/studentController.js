@@ -7,25 +7,16 @@ import StudentModel from "../../models/student/student.js";
 // * @route   GET /api/items
 // * @access  Public
 const getAllStudents = asyncHandler(async (req, res) => {
-    const { page, limit } = req.query;
 
     try {
-        const count = await StudentModel.countDocuments();
 
         const data = await StudentModel.find({})
             .sort("-createdAt")
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
-            .exec();
-
-        console.log(data)
 
         res.status(201).json({
             status: "success",
             message: "all students",
             response: data,
-            totalPages: Math.ceil(count / limit),
-            currentPage: Number(page),
         });
     } catch (error) {
         res.status(404).json({
