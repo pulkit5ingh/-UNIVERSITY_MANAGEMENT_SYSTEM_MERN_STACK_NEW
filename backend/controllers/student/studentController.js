@@ -9,7 +9,6 @@ import StudentModel from "../../models/student/student.js";
 const getAllStudents = asyncHandler(async (req, res) => {
 
     try {
-
         const data = await StudentModel.find({})
             .sort("-createdAt")
 

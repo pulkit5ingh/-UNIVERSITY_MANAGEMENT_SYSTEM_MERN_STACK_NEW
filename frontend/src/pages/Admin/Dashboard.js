@@ -15,10 +15,10 @@ const Dashboard = () => {
 
     // * USE EFFECT REDIRECT TO DASH BOARD 
     useEffect(() => {
-        // if (userInfo) {
-        // } else {
-        //     navigate("/");
-        // }
+        if (userInfo) {
+        } else {
+            navigate("/");
+        }
     }, [navigate, userInfo])
 
     // * ========================

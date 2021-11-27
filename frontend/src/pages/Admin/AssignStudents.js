@@ -1,11 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 import AdminSideBar from '../../components/SideBar/AdminSideBar'
 import Header from '../../components/Header/Header'
 
 const AssignStudents = () => {
+
+    // ? ================================== Authentication 
+    // * use navigate 
+    const navigate = useNavigate();
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
+
+    // * USE EFFECT REDIRECT TO DASH BOARD 
+    useEffect(() => {
+        if (userInfo) {
+        } else {
+            navigate("/");
+        }
+    }, [navigate, userInfo])
+
+    // ? ================================== Authentication 
 
     // * use state 
     const [loading, setLoading] = useState(true);
@@ -17,9 +36,6 @@ const AssignStudents = () => {
         course_assigned_teacher: { teacher_first_name: "NULL" }
     });
     const [students, setStudents] = useState([]);
-
-    // * use navigate 
-    const navigate = useNavigate();
 
     // * Use params
     let params = useParams();

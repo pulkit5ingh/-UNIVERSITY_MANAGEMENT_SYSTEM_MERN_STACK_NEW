@@ -7,23 +7,18 @@ import TeacherModel from "../../models/teacher/teacher.js";
 // * @route   GET /api/teacher
 // * @access  Public
 const getAllTeachers = asyncHandler(async (req, res) => {
-    const { page, limit } = req.query;
 
     try {
         const count = await TeacherModel.countDocuments();
 
         const data = await TeacherModel.find({})
             .sort("-createdAt")
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
             .exec();
 
         res.status(201).json({
             status: "success",
             message: "all teachers",
             response: data,
-            totalPages: Math.ceil(count / limit),
-            currentPage: Number(page),
         });
     } catch (error) {
         res.status(404).json({

@@ -7,14 +7,11 @@ const AllStudentsTable = () => {
 
     // * Use State
     const [students, setStudents] = useState([])
-    let [page, setPage] = useState(1);
-    let [limit, setLimit] = useState(5);
 
     const getAllStudents = async () => {
-
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/students?page=${page}&limit=${limit}`,
+                `http://localhost:5000/api/students`,
             )
             // alert(JSON.stringify(data))
             console.log(students)
@@ -24,17 +21,9 @@ const AllStudentsTable = () => {
         }
     }
 
-    const nextPage = () => {
-        setPage((page = page + 1));
-    };
-
-    const previoustPage = () => {
-        setPage((page = page - 1));
-    };
-
     useEffect(() => {
         getAllStudents();
-    }, [page, limit])
+    }, [])
 
     return (
         <div className="table-container">
@@ -70,11 +59,6 @@ const AllStudentsTable = () => {
                     )
                 })}
             </table>
-
-            <div className="pre-next-container">
-                <button className="next-prev" onClick={previoustPage}>PREVIOUS</button>
-                <button className="next-prev" onClick={nextPage}>NEXT</button>
-            </div>
 
         </div>
     )
