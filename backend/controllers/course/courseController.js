@@ -338,6 +338,47 @@ const getTeacherCourses = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    get all teacher/course id courses
+// * @route   GET /api/
+// * @access  Public
+const getAllCoursesByTeacherAndCourseID = asyncHandler(async (req, res) => {
+    const { teacher_id, course_id } = req.params;
+
+    console.log(teacher_id)
+    console.log(course_id)
+
+    try {
+        const data = await CourseModel.find({
+            $and: [
+                {
+                    course_assigned_teacher: teacher_id
+                },
+                {
+                    _id: course_id
+                }
+            ]
+
+        }).populate("course_assigned_teacher").populate("course_assigned_students")
+
+        console.log(data)
+
+        res.status(201).json({
+            status: "success",
+            message: "course",
+            response: data,
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "course not found",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
 // * @desc    delete a student
 // * @route   DELETE /api/student
 // * @access  Private/Admin
@@ -372,7 +413,8 @@ export {
     pushStudentToCourse,
     popStudentToCourse,
     getStudentCourses,
-    getTeacherCourses
+    getTeacherCourses,
+    getAllCoursesByTeacherAndCourseID
 };
 
 // * =========================================================== //

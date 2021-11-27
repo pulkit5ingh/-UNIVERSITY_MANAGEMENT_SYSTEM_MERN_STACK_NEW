@@ -12,7 +12,8 @@ import {
     pushStudentToCourse,
     popStudentToCourse,
     getStudentCourses,
-    getTeacherCourses
+    getTeacherCourses,
+    getAllCoursesByTeacherAndCourseID
 } from "../../controllers/course/courseController.js";
 
 // *=======================================================================================//
@@ -49,8 +50,13 @@ router.route("/remove_student_from_course/:id").put(popStudentToCourse)
 
 // *=======================================================================================//
 
-router.route("course/:id").delete(deleteCourse);
+router.route("/course/:id").delete(deleteCourse);
 
 // *=======================================================================================//
+
+router.route("/course_by_teacher_and_course_id/:teacher_id/:course_id").get(getAllCoursesByTeacherAndCourseID);
+
+// *=======================================================================================//
+
 
 export default router;

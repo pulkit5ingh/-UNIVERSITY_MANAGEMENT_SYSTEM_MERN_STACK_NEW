@@ -15,6 +15,7 @@ const TeacherSideBar = () => {
                         <li><Link to="/teacher/profile"><a>PROFILE</a></Link></li>
                         <li><Link to="/teacher/courses"><a>VIEW COURSES</a></Link></li>
                         <li><Link to="/teacher/add-attendance"><a>ADD ATTENDANCE</a></Link></li>
+                        <li><Link to="/teacher/add-marks"><a>ADD MARKS</a></Link></li>
                     </ul>
                 </nav>
             </div>
