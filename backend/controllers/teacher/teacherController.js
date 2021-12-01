@@ -204,12 +204,70 @@ const deleteTeacher = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    Auth admin & get token
+// * @route   POST /api/admin/login
+// * @access  Public
+const authTeacher = asyncHandler(async (req, res) => {
+
+    // * required array
+    let required = [];
+
+    if (!req.body.teacher_email)
+        required.push("teacher_email");
+    if (!req.body.teacher_password)
+        required.push("teacher_password");
+
+    // * check required fields !
+    if (required.length === 0) {
+
+        console.log(req.body)
+
+        const { teacher_email, teacher_password } = req.body
+
+        const teacher = await AdminModel.findOne({ teacher_email })
+
+        if (teacher && (await teacher.matchPassword(teacher_password))) {
+            res.json({
+                status: "success",
+                response: {
+                    _id: teacher._id,
+                    teacher_first_name: teacher.teacher_first_name,
+                    teacher_last_name: teacher.teacher_last_name,
+                    teacher_email: teacher.teacher_email,
+                    isTeacher: true,
+                    token: generateToken(teacher._id),
+                },
+                message: "Authentication Succesfull"
+            })
+        } else {
+            res.status(401).json({
+                status: "fail",
+                response: null,
+                message: "Invalid email or password"
+            })
+        }
+    } else {
+        // * mapping the required array list
+        let message = required.map((item) => {
+            return " " + item;
+        });
+        res.json({
+            status: "fail",
+            message: "Following fields are required - " + message,
+            response: [],
+        });
+    }
+})
+
+// * =========================================================== //
+
 export {
     getAllTeachers,
     getTeacher,
     deleteTeacher,
     createTeacher,
     updateTeacher,
+    authTeacher
 };
 
 // * =========================================================== //

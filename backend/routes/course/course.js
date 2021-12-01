@@ -58,5 +58,4 @@ router.route("/course_by_teacher_and_course_id/:teacher_id/:course_id").get(getA
 
 // *=======================================================================================//
 
-
 export default router;

@@ -30,7 +30,7 @@ const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
-        dispatch(login(data.email, data.password))
+        dispatch(login(data.email, data.password. data.access_as))
     };
 
     console.log(watch("example")); // watch input value by passing the name of it

@@ -8,7 +8,7 @@ import {
 
 // * Admin Login 
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, access_as) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_LOGIN_REQUEST,
@@ -20,43 +20,72 @@ export const login = (email, password) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.post(
-            'http://localhost:5000/api/admin/login',
-            { admin_email: email, admin_password: password },
-            config
-        )
+        // * check access as
+        if (access_as === "admin") {
 
-        console.log(data)
+            const { data } = await axios.post(
+                'http://localhost:5000/api/admin/login',
+                { admin_email: email, admin_password: password },
+                config
+            )
 
-        if (data.status === "success") {
-            dispatch({
-                type: ADMIN_LOGIN_SUCCESS,
-                payload: data.response,
-                message: data.message,
-            })
-            localStorage.setItem('userInfo', JSON.stringify(data.response))
+            console.log(data)
 
-        } else {
-            dispatch({
-                type: ADMIN_LOGIN_FAIL,
-                payload: data.response,
-                message: data.message,
-            })
+            if (data.status === "success") {
+                dispatch({
+                    type: ADMIN_LOGIN_SUCCESS,
+                    payload: data.response,
+                    message: data.message,
+                })
+                localStorage.setItem('userInfo', JSON.stringify(data.response))
+
+            } else {
+                dispatch({
+                    type: ADMIN_LOGIN_FAIL,
+                    payload: data.response,
+                    message: data.message,
+                })
+            }
+        } else if (access_as === "teacher") {
+            const { data } = await axios.post(
+                'http://localhost:5000/api/teacher/login',
+                { admin_email: email, admin_password: password },
+                config
+            )
+
+            console.log(data)
+
+            if (data.status === "success") {
+                dispatch({
+                    type: ADMIN_LOGIN_SUCCESS,
+                    payload: data.response,
+                    message: data.message,
+                })
+                localStorage.setItem('userInfo', JSON.stringify(data.response))
+
+            } else {
+                dispatch({
+                    type: ADMIN_LOGIN_FAIL,
+                    payload: data.response,
+                    message: data.message,
+                })
+
+            }
         }
 
-    } catch (error) {
-        dispatch({
-            type: ADMIN_LOGIN_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        })
+        } catch (error) {
+            dispatch({
+                type: ADMIN_LOGIN_FAIL,
+                payload:
+                    error.response && error.response.data.message
+                        ? error.response.data.message
+                        : error.message,
+            })
+        }
     }
-}
 
 export const logout = () => (dispatch) => {
-    localStorage.removeItem('userInfo')
-    dispatch({ type: ADMIN_LOGOUT })
-    document.location.href = '/'
-}
+        localStorage.removeItem('userInfo')
+        dispatch({ type: ADMIN_LOGOUT })
+        document.location.href = '/'
+    }
