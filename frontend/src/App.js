@@ -30,6 +30,7 @@ import StudentDashboard from "./pages/Student/Dashboard";
 import StudentProfile from "./pages/Student/Profile";
 import StudentCourses from "./pages/Student/StudentCourses";
 import StudentAttendanceTable from "./pages/Student/StudentAttendanceTable";
+import StudentMarks from "./pages/Student/StudentMarks";
 
 const App = () => {
   return (
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/courses" element={<StudentCourses />} />
           <Route path="/student/attendance" element={<StudentAttendanceTable />} />
+          <Route path="/student/marks" element={<StudentMarks />} />
 
         </Route>
       </Routes>

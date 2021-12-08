@@ -40,7 +40,6 @@ const AllStudentsTable = () => {
                     <th>domicile</th>
                     <th>EDIT</th>
                     <th>DELETE</th>
-                    <th>VIEW</th>
                 </tr>
                 {students.map((student, key) => {
                     return (
@@ -54,7 +53,6 @@ const AllStudentsTable = () => {
                             <td>{student.student_domicile}</td>
                             <td><button className="table-edit-btn">EDIT</button></td>
                             <td><button className="table-delete-btn">DELETE</button></td>
-                            <td><button className="table-view-btn">VIEW</button></td>
                         </tr>
                     )
                 })}

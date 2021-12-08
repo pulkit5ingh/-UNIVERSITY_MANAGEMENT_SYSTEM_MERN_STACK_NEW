@@ -8,7 +8,6 @@ import CourseModel from "../../models/course/course.js";
 // * @access  Public
 const getAllCourse = asyncHandler(async (req, res) => {
     // const { year, semester } = req.params;
-    console.log(req.params)
 
     try {
         let year = parseInt(req.params.year);
@@ -44,14 +43,14 @@ const getAllCourse = asyncHandler(async (req, res) => {
 const getCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
-    console.log(id)
+  
 
     try {
         const data = await CourseModel.findById({ _id: req.params.id })
             .populate("course_assigned_teacher")
             .populate("course_assigned_students")
 
-        console.log(data)
+   
 
         res.status(201).json({
             status: "success",
@@ -101,7 +100,7 @@ const createCourse = asyncHandler(async (req, res) => {
     // * check required fields !
     if (required.length === 0) {
 
-        console.log(req.body)
+   
 
         const {
             student_first_name,
@@ -192,19 +191,18 @@ const pushStudentToCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { student_id } = req.body
 
-    console.log(req.body)
-
+  
     try {
 
         // * Lets Check if Student is Already in array 
 
         let findStudent = await CourseModel.findOne({ _id: id });
 
-        console.log("ALL STUDENTS => ", findStudent.course_assigned_students)
+
 
         let isStudent = findStudent.course_assigned_students.includes(student_id);
 
-        console.log("IS STUDENT => ", isStudent)
+
 
         if (isStudent) {
             res.status(200).json({
@@ -245,7 +243,7 @@ const popStudentToCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { student_id } = req.body
 
-    console.log(req.body)
+
 
     try {
 
@@ -280,14 +278,14 @@ const popStudentToCourse = asyncHandler(async (req, res) => {
 const getStudentCourses = asyncHandler(async (req, res) => {
     const { student_id } = req.params;
 
-    console.log(student_id)
+   
 
     try {
         const data = await CourseModel.find({
             course_assigned_students: student_id
         }).populate("course_assigned_teacher")
 
-        console.log(data)
+
 
         res.status(201).json({
             status: "success",
@@ -312,14 +310,14 @@ const getStudentCourses = asyncHandler(async (req, res) => {
 const getTeacherCourses = asyncHandler(async (req, res) => {
     const { teacher_id } = req.params;
 
-    console.log(teacher_id)
+ 
 
     try {
         const data = await CourseModel.find({
             course_assigned_teacher: teacher_id
         }).populate("course_assigned_teacher").populate("course_assigned_students")
 
-        console.log(data)
+       
 
         res.status(201).json({
             status: "success",
@@ -344,8 +342,7 @@ const getTeacherCourses = asyncHandler(async (req, res) => {
 const getAllCoursesByTeacherAndCourseID = asyncHandler(async (req, res) => {
     const { teacher_id, course_id } = req.params;
 
-    console.log(teacher_id)
-    console.log(course_id)
+
 
     try {
         const data = await CourseModel.find({
@@ -360,7 +357,7 @@ const getAllCoursesByTeacherAndCourseID = asyncHandler(async (req, res) => {
 
         }).populate("course_assigned_teacher").populate("course_assigned_students")
 
-        console.log(data)
+     
 
         res.status(201).json({
             status: "success",

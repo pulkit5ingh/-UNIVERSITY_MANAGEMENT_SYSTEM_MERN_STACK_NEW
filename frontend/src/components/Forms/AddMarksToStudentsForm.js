@@ -8,6 +8,7 @@ const AddMarksToStudentsForm = () => {
 
     const [courseid, setCourseId] = useState(null)
     const [coureses, setCourses] = useState([])
+    const [teacherMarks, setTeacherMarks] = useState([])
     const [allStudentsOfThisCourses, setAllStudentsOfThisCourses] = useState([])
 
     // alert(JSON.stringify(allStudentsOfThisCourses))
@@ -20,7 +21,7 @@ const AddMarksToStudentsForm = () => {
 
     // * REACT HOOK FORM 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = async data => {
+    const onCourseSubmit = async data => {
 
         try {
             // console.log(data.course_id)
@@ -37,6 +38,61 @@ const AddMarksToStudentsForm = () => {
         }
     };
 
+    const onMarksSubmit = async data => {
+
+        try {
+            alert(JSON.stringify(data))
+
+            let formData = {
+                attendance_marks: data.attendance_marks,
+                midterm_marks: data.midterm_marks,
+                final_marks: data.final_marks,
+
+                course_id: courseid,
+                teacher_id: "619fbabebd201cf406570743",
+                student_id: data.student_id,
+            }
+
+            try {
+
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+
+                const data = await axios.post(
+                    'http://localhost:5000/api/marks',
+                    formData,
+                    config
+                )
+
+                console.log(data)
+                if (data.data.status === "success") {
+                    window.location.reload(false);
+                } else {
+                    alert("SOMETHING WENT WRONG")
+                }
+
+            } catch (error) {
+
+            }
+
+        } catch (error) {
+
+        }
+    };
+
+    // * Get All Students
+    const getAlMarksbyTeacherId = async () => {
+        try {
+            const data = await axios.get(
+                `http://localhost:5000/api/marks_by_teacher/619fbabebd201cf406570743`,
+            )
+            setTeacherMarks(data.data.response)
+        } catch (error) {
+        }
+    }
 
     // * Get All Students
     const getAllCoursesbyTeacherId = async () => {
@@ -82,13 +138,14 @@ const AddMarksToStudentsForm = () => {
     useEffect(() => {
         getAllCoursesbyTeacherId();
         getAllStudentsByTeacherAndCourseId(courseid);
-    }, [courseid])
+        getAlMarksbyTeacherId();
+    }, [courseid,])
 
     return (
         <div className="table-container">
             {/* <Link className="add-btn" to="/admin/add-student">COURSES</Link> */}
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onCourseSubmit)}>
                 <div className="dashboard-container">
                     <h4>ADD MARKS</h4>
                     <div class="row">
@@ -117,33 +174,73 @@ const AddMarksToStudentsForm = () => {
                 </div>
             </form>
 
-
             {loading ?
                 <>
                     Loading ....
                 </> :
                 <>
                     <div>
+                        <form onSubmit={handleSubmit(onMarksSubmit)}>
+                            <label>SELECT STUDENT</label>
+                            <select name="student_id"
+                                {...register("student_id")}
+                            >
+                                {allStudentsOfThisCourses.map((student, index) => {
+                                    return (
+                                        <option key={index} value={student._id}>{student.student_first_name}</option>
+                                    )
+                                })}
+                            </select>
 
-                        <label>SELECT STUDENT</label>
-                        <select name="student_id"
-                            {...register("student_id")}
-                        >
-                            {allStudentsOfThisCourses.map((student, index) => {
-                                return (
-                                    <option key={index} value={student._id}>{student.student_first_name}</option>
-                                )
-                            })}
-                        </select>
+                            {/* //* ATTENDANCE MARKS */}
+                            <label>ATTENDANCE MARKS</label>
+                            <input type="number" name="attendance_marks" placeholder="attendance marks ..."
+                                {...register("attendance_marks")}
+                            />
 
-                        {/* //* SELECT STUDENT */}
-                        
+                            {/* //* MIDTERM MARKS */}
+                            <label>MIDTERM MARKS</label>
+                            <input type="number" name="midterm_marks" placeholder="midterm marks ..."
+                                {...register("midterm_marks")}
+                            />
 
-                        <input type="submit" value="Submit" />
+                            {/* //* FINAL MARKS */}
+                            <label>FINAL MARKS</label>
+                            <input type="number" name="final_marks" placeholder="final marks ..."
+                                {...register("final_marks")}
+                            />
 
+                            <input type="submit" value="Submit" />
+                        </form>
                     </div>
                 </>
             }
+
+            {/* SHOW TEACHER MARKS */}
+
+
+            <table>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Teacher name</th>
+                    <th>Student name</th>
+                    <th>Attendance Marks</th>
+                    <th>Mid Term Marks</th>
+                    <th>Final Term Marks</th>
+                </tr>
+                {teacherMarks.map((teacherMark, key) => {
+                    return (
+                        <tr>
+                            <td>{teacherMark.course_id.course_name}</td>
+                            <td>{teacherMark.teacher_id.teacher_first_name}</td>
+                            <td>{teacherMark.student_id.student_first_name}</td>
+                            <td>{teacherMark.attendance_marks}</td>
+                            <td>{teacherMark.midterm_marks}</td>
+                            <td>{teacherMark.final_marks}</td>
+                        </tr>
+                    )
+                })}
+            </table>
 
         </div>
     )

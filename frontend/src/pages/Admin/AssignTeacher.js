@@ -17,12 +17,12 @@ const AssignTeacher = () => {
     const { error, userInfo, message } = adminLogin;
 
     // * USE EFFECT REDIRECT TO DASH BOARD 
-    useEffect(() => {
-        if (userInfo) {
-        } else {
-            navigate("/");
-        }
-    }, [navigate, userInfo])
+    // useEffect(() => {
+    //     if (userInfo) {
+    //     } else {
+    //         navigate("/");
+    //     }
+    // }, [navigate, userInfo])
     // ? ================================== Authentication 
 
     // * use state 
