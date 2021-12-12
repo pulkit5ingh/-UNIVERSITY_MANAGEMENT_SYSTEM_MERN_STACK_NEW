@@ -17,6 +17,12 @@ const adminSchema = new mongoose.Schema(
     },
 
     // * ok
+    admin_cnic: {
+      type: String,
+      required: true,
+    },
+
+    // * ok
     admin_email: {
       type: String,
       required: true,
@@ -32,6 +38,12 @@ const adminSchema = new mongoose.Schema(
     admin_password: {
       type: String,
       required: true,
+    },
+
+    // * ok
+    is_admin: {
+      type: Boolean,
+      default: true,
     },
 
     // * ok

@@ -125,8 +125,8 @@ const authAdmin = asyncHandler(async (req, res) => {
   // * required array
   let required = [];
 
-  if (!req.body.admin_email)
-    required.push("admin_email");
+  if (!req.body.admin_cnic)
+    required.push("admin_cnic");
   if (!req.body.admin_password)
     required.push("admin_password");
 
@@ -135,11 +135,11 @@ const authAdmin = asyncHandler(async (req, res) => {
 
     console.log(req.body)
 
-    const { admin_email, admin_password } = req.body
+    const { admin_cnic, admin_password } = req.body
 
-    const admin = await AdminModel.findOne({ admin_email })
+    const admin = await AdminModel.findOne({ admin_cnic, admin_password })
 
-    if (admin && (await admin.matchPassword(admin_password))) {
+    if (admin) {
       res.json({
         status: "success",
         response: {
@@ -147,7 +147,9 @@ const authAdmin = asyncHandler(async (req, res) => {
           admin_first_name: admin.admin_first_name,
           admin_last_name: admin.admin_last_name,
           admin_email: admin.admin_email,
-          isAdmin: true,
+          admin_cnic: admin.admin_cnic,
+          is_admin: true,
+          is_teacher: false,
           token: generateToken(admin._id),
         },
         message: "Authentication Succesfull"
@@ -156,7 +158,7 @@ const authAdmin = asyncHandler(async (req, res) => {
       res.status(401).json({
         status: "fail",
         response: null,
-        message: "Invalid email or password"
+        message: "Invalid cnic or password"
       })
     }
   } else {

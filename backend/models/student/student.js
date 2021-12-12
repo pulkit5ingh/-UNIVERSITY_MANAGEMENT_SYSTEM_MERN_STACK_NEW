@@ -61,6 +61,12 @@ const studentSchema = new mongoose.Schema(
         },
 
         // * ok
+        is_student: {
+            type: Boolean,
+            default: true,
+        },
+
+        // * ok
         status: {
             type: Boolean,
             default: true,

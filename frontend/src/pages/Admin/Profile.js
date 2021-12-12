@@ -17,12 +17,12 @@ const Profile = () => {
     // alert(JSON.stringify(userInfo))
 
     // * USE EFFECT REDIRECT TO DASH BOARD 
-    // useEffect(() => {
-    //     if (userInfo) {
-    //     } else {
-    //         navigate("/");
-    //     }
-    // }, [navigate, userInfo])
+    useEffect(() => {
+        if (userInfo.is_admin) {
+        } else {
+            navigate("/");
+        }
+    }, [navigate, userInfo])
 
     // ? ================================== Authentication 
 

@@ -18,12 +18,12 @@ connectToMongoDb();
 
 const importData = async () => {
     try {
-        // await AdminModel.deleteMany();
+        await AdminModel.deleteMany();
         await StudentModel.deleteMany();
         await TeacherModel.deleteMany();
         await CourseModel.deleteMany();
 
-        // await AdminModel.insertMany(AdminData);
+        await AdminModel.insertMany(AdminData);
         await StudentModel.insertMany(StudentData);
         await TeacherModel.insertMany(TeacherData);
         await CourseModel.insertMany(CourseData);

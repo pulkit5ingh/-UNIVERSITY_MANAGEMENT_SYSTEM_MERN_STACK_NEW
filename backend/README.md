@@ -1,3 +1,3 @@
-## import data data:import  -> yarn run data:import 
+## import data data:import -> yarn run data:import 
 
-## delete data data:destroy
+## delete data => yarn run data:destroy

@@ -73,6 +73,12 @@ const teacherSchema = new mongoose.Schema(
         },
 
         // * ok
+        is_teacher: {
+            type: Boolean,
+            default: true,
+        },
+
+        // * ok
         status: {
             type: Boolean,
             default: true,

@@ -212,8 +212,8 @@ const authTeacher = asyncHandler(async (req, res) => {
     // * required array
     let required = [];
 
-    if (!req.body.teacher_email)
-        required.push("teacher_email");
+    if (!req.body.teacher_nic)
+        required.push("teacher_nic");
     if (!req.body.teacher_password)
         required.push("teacher_password");
 
@@ -222,11 +222,11 @@ const authTeacher = asyncHandler(async (req, res) => {
 
         console.log(req.body)
 
-        const { teacher_email, teacher_password } = req.body
+        const { teacher_nic, teacher_password } = req.body
 
-        const teacher = await AdminModel.findOne({ teacher_email })
+        const teacher = await AdminModel.findOne({ teacher_nic, teacher_password })
 
-        if (teacher && (await teacher.matchPassword(teacher_password))) {
+        if (teacher) {
             res.json({
                 status: "success",
                 response: {
@@ -234,7 +234,9 @@ const authTeacher = asyncHandler(async (req, res) => {
                     teacher_first_name: teacher.teacher_first_name,
                     teacher_last_name: teacher.teacher_last_name,
                     teacher_email: teacher.teacher_email,
-                    isTeacher: true,
+                    teacher_nic: teacher.teacher_nic,
+                    is_admin: false,
+                    is_teacher: true,
                     token: generateToken(teacher._id),
                 },
                 message: "Authentication Succesfull"

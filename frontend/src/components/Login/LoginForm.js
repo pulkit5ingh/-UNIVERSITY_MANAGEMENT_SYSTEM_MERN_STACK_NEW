@@ -30,21 +30,22 @@ const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
-        dispatch(login(data.email, data.password. data.access_as))
+        alert(JSON.stringify(data))
+        dispatch(login(data.admin_cnic, data.password, data.access_as))
     };
 
-    console.log(watch("example")); // watch input value by passing the name of it
+    // console.log(watch("example")); // watch input value by passing the name of it
 
 
     return (
         <div className="container">
             <h1><b>LOG IN</b></h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <label for="fname">EMAIL</label>
-                <input type="email" name="email" placeholder="Your Email ..."
-                    {...register("email", { required: true })}
+                <label for="fname">CNIC</label>
+                <input type="text" name="admin_cnic" placeholder="Your cnic ..."
+                    {...register("admin_cnic", { required: true })}
                 />
-                <div className="error">{errors.email && <span>This field is required</span>}</div>
+                <div className="error">{errors.admin_cnic && <span>This field is required</span>}</div>
                 <label for="lname">PASSWORD</label>
                 <input type="password" name="password" placeholder="Your Password ..."
                     {...register("password", { required: true })}

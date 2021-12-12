@@ -8,7 +8,7 @@ import {
 
 // * Admin Login 
 
-export const login = (email, password, access_as) => async (dispatch) => {
+export const login = (admin_cnic, password, access_as) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_LOGIN_REQUEST,
@@ -20,12 +20,16 @@ export const login = (email, password, access_as) => async (dispatch) => {
             },
         }
 
+        alert(admin_cnic, password, access_as)
+
         // * check access as
         if (access_as === "admin") {
 
+            alert("ADMIN LOGIN")
+
             const { data } = await axios.post(
                 'http://localhost:5000/api/admin/login',
-                { admin_email: email, admin_password: password },
+                { admin_cnic: admin_cnic, admin_password: password },
                 config
             )
 
@@ -49,7 +53,7 @@ export const login = (email, password, access_as) => async (dispatch) => {
         } else if (access_as === "teacher") {
             const { data } = await axios.post(
                 'http://localhost:5000/api/teacher/login',
-                { admin_email: email, admin_password: password },
+                { admin_cnic: admin_cnic, admin_password: password },
                 config
             )
 
@@ -71,21 +75,23 @@ export const login = (email, password, access_as) => async (dispatch) => {
                 })
 
             }
+        } else {
+            alert(JSON.stringify("SOMETHING WENT WRONG !"))
         }
 
-        } catch (error) {
-            dispatch({
-                type: ADMIN_LOGIN_FAIL,
-                payload:
-                    error.response && error.response.data.message
-                        ? error.response.data.message
-                        : error.message,
-            })
-        }
+    } catch (error) {
+        dispatch({
+            type: ADMIN_LOGIN_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
     }
+}
 
 export const logout = () => (dispatch) => {
-        localStorage.removeItem('userInfo')
-        dispatch({ type: ADMIN_LOGOUT })
-        document.location.href = '/'
-    }
+    localStorage.removeItem('userInfo')
+    dispatch({ type: ADMIN_LOGOUT })
+    document.location.href = '/'
+}
