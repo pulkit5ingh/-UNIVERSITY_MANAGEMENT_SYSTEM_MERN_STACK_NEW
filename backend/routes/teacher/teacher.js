@@ -9,6 +9,7 @@ import {
     deleteTeacher,
     createTeacher,
     updateTeacher,
+    authTeacher
 } from "../../controllers/teacher/teacherController.js";
 
 // *=======================================================================================//
@@ -33,7 +34,7 @@ router.route("/teacher/:id").delete(deleteTeacher);
 
 // *=======================================================================================//
 
-// router.route("/teacher/login").post(authTeacher);
+router.route("/teacher/login").post(authTeacher);
 
 // *=======================================================================================//
 

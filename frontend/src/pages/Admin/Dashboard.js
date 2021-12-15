@@ -13,12 +13,23 @@ const Dashboard = () => {
     const adminLogin = useSelector((state) => state.adminLogin)
     const { loading, error, userInfo, message } = adminLogin;
 
-    alert(JSON.stringify(userInfo))
+    // alert(JSON.stringify(userInfo))
 
-    // * USE EFFECT REDIRECT TO DASH BOARD 
+    // * USE EFFECT REDIRECT TO LOG IN 
     useEffect(() => {
-        if (userInfo.is_admin === true) {
-        } else {
+        if (!userInfo) {
+            navigate("/");
+        }
+        if (userInfo) {
+
+            if (userInfo.is_admin === true) {
+
+            }
+            else {
+                navigate("/");
+            }
+        }
+        else {
             navigate("/");
         }
     }, [navigate, userInfo])

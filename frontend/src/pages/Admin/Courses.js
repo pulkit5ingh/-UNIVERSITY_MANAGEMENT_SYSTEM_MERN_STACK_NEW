@@ -15,13 +15,27 @@ const Courses = () => {
     const adminLogin = useSelector((state) => state.adminLogin)
     const { loading, error, userInfo, message } = adminLogin;
 
-    // * USE EFFECT REDIRECT TO DASH BOARD 
-    // useEffect(() => {
-    //     if (userInfo) {
-    //     } else {
-    //         navigate("/");
-    //     }
-    // }, [navigate, userInfo])
+
+    // * USE EFFECT REDIRECT TO LOG IN 
+    useEffect(() => {
+        if (!userInfo) {
+            navigate("/");
+        }
+        if (userInfo) {
+
+            if (userInfo.is_admin === true) {
+
+            }
+            else {
+                navigate("/");
+            }
+        }
+        else {
+            navigate("/");
+        }
+    }, [navigate, userInfo])
+
+    // * ========================
     // ? ================================== Authentication 
 
     return (

@@ -20,7 +20,15 @@ const LoginForm = () => {
     // * USE EFFECT REDIRECT TO DASH BOARD 
     useEffect(() => {
         if (userInfo) {
-            navigate("/admin/dashboard");
+            if (userInfo.is_admin === true) {
+                navigate("/admin/dashboard");
+            } else if (userInfo.is_teacher === true) {
+                navigate("/teacher/dashboard");
+            } else if (userInfo.is_student === true) {
+                navigate("/student/dashboard");
+            } else {
+                navigate("/");
+            }
         }
     }, [navigate, userInfo])
 

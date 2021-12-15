@@ -8,7 +8,7 @@ import {
 
 // * Admin Login 
 
-export const login = (admin_cnic, password, access_as) => async (dispatch) => {
+export const login = (cnic, password, access_as) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_LOGIN_REQUEST,
@@ -20,7 +20,7 @@ export const login = (admin_cnic, password, access_as) => async (dispatch) => {
             },
         }
 
-        alert(admin_cnic, password, access_as)
+        alert(cnic, password, access_as)
 
         // * check access as
         if (access_as === "admin") {
@@ -29,11 +29,9 @@ export const login = (admin_cnic, password, access_as) => async (dispatch) => {
 
             const { data } = await axios.post(
                 'http://localhost:5000/api/admin/login',
-                { admin_cnic: admin_cnic, admin_password: password },
+                { admin_cnic: cnic, admin_password: password },
                 config
             )
-
-            console.log(data)
 
             if (data.status === "success") {
                 dispatch({
@@ -51,13 +49,14 @@ export const login = (admin_cnic, password, access_as) => async (dispatch) => {
                 })
             }
         } else if (access_as === "teacher") {
+            alert("TEACHER LOGIN API CALL")
             const { data } = await axios.post(
                 'http://localhost:5000/api/teacher/login',
-                { admin_cnic: admin_cnic, admin_password: password },
+                { teacher_cnic: cnic, teacher_password: password },
                 config
             )
 
-            console.log(data)
+            alert(JSON.stringify(data))
 
             if (data.status === "success") {
                 dispatch({
@@ -75,7 +74,34 @@ export const login = (admin_cnic, password, access_as) => async (dispatch) => {
                 })
 
             }
-        } else {
+        } else if (access_as === "student") {
+            alert("STUDENT LOGIN API CALL")
+            const { data } = await axios.post(
+                'http://localhost:5000/api/student/login',
+                { student_cnic: cnic, student_password: password },
+                config
+            )
+
+            alert(JSON.stringify(data))
+
+            if (data.status === "success") {
+                dispatch({
+                    type: ADMIN_LOGIN_SUCCESS,
+                    payload: data.response,
+                    message: data.message,
+                })
+                localStorage.setItem('userInfo', JSON.stringify(data.response))
+
+            } else {
+                dispatch({
+                    type: ADMIN_LOGIN_FAIL,
+                    payload: data.response,
+                    message: data.message,
+                })
+
+            }
+        }
+        else {
             alert(JSON.stringify("SOMETHING WENT WRONG !"))
         }
 

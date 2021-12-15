@@ -9,6 +9,7 @@ import {
     deleteStudent,
     createStudent,
     updateStudent,
+    authStudent
 } from "../../controllers/student/studentController.js";
 
 // *=======================================================================================//
@@ -30,6 +31,10 @@ router.route("/student").put(updateStudent);
 // *=======================================================================================//
 
 router.route("/student/:id").delete(deleteStudent);
+
+// *=======================================================================================//
+
+router.route("/student/login").post(authStudent);
 
 // *=======================================================================================//
 

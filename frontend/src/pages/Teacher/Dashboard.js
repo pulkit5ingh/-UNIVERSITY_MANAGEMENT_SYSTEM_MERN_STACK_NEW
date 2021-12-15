@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     alert(JSON.stringify(userInfo))
 
-    // * USE EFFECT REDIRECT TO DASH BOARD 
+    // * USE EFFECT REDIRECT TO LOG IN 
     useEffect(() => {
         if (!userInfo) {
             navigate("/");

@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import StudentModel from "../../models/student/student.js";
+import generateToken from '../../configs/jwt/generateToken.js'
 
 // * =========================================================== //
 
@@ -193,12 +194,72 @@ const deleteStudent = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    Auth admin & get token
+// * @route   POST /api/admin/login
+// * @access  Public
+const authStudent = asyncHandler(async (req, res) => {
+
+    // * required array
+    let required = [];
+
+    if (!req.body.student_cnic)
+        required.push("student_cnic");
+    if (!req.body.student_password)
+        required.push("student_password");
+
+    // * check required fields !
+    if (required.length === 0) {
+
+        console.log(req.body)
+
+        const { student_cnic, student_password } = req.body
+
+        const student = await StudentModel.findOne({ student_cnic, student_password })
+
+        if (student) {
+            res.json({
+                status: "success",
+                response: {
+                    _id: student._id,
+                    student_first_name: student.student_first_name,
+                    student_last_name: student.student_last_name,
+                    student_email: student.student_email,
+                    student_cnic: student.student_cnic,
+                    is_admin: false,
+                    is_student: true,
+                    token: generateToken(student._id),
+                },
+                message: "Authentication Succesfull"
+            })
+        } else {
+            res.status(401).json({
+                status: "fail",
+                response: null,
+                message: "Invalid email or password"
+            })
+        }
+    } else {
+        // * mapping the required array list
+        let message = required.map((item) => {
+            return " " + item;
+        });
+        res.json({
+            status: "fail",
+            message: "Following fields are required - " + message,
+            response: [],
+        });
+    }
+})
+
+// * =========================================================== //
+
 export {
     getAllStudents,
     getStudent,
     deleteStudent,
     createStudent,
     updateStudent,
+    authStudent
 };
 
 // * =========================================================== //

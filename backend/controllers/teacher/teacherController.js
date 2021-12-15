@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import TeacherModel from "../../models/teacher/teacher.js";
+import generateToken from '../../configs/jwt/generateToken.js'
 
 // * =========================================================== //
 
@@ -212,8 +213,8 @@ const authTeacher = asyncHandler(async (req, res) => {
     // * required array
     let required = [];
 
-    if (!req.body.teacher_nic)
-        required.push("teacher_nic");
+    if (!req.body.teacher_cnic)
+        required.push("teacher_cnic");
     if (!req.body.teacher_password)
         required.push("teacher_password");
 
@@ -222,9 +223,9 @@ const authTeacher = asyncHandler(async (req, res) => {
 
         console.log(req.body)
 
-        const { teacher_nic, teacher_password } = req.body
+        const { teacher_cnic, teacher_password } = req.body
 
-        const teacher = await AdminModel.findOne({ teacher_nic, teacher_password })
+        const teacher = await TeacherModel.findOne({ teacher_cnic, teacher_password })
 
         if (teacher) {
             res.json({
@@ -234,7 +235,7 @@ const authTeacher = asyncHandler(async (req, res) => {
                     teacher_first_name: teacher.teacher_first_name,
                     teacher_last_name: teacher.teacher_last_name,
                     teacher_email: teacher.teacher_email,
-                    teacher_nic: teacher.teacher_nic,
+                    teacher_cnic: teacher.teacher_cnic,
                     is_admin: false,
                     is_teacher: true,
                     token: generateToken(teacher._id),
