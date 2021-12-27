@@ -102,7 +102,7 @@ const AssignTeacher = () => {
 
         console.log(data)
         if (data.data.status === "success") {
-            window.location.reload(false);
+            // window.location.reload(false);
             navigate(`/admin/courses`);
         } else {
             alert(JSON.stringify(data.data.message))

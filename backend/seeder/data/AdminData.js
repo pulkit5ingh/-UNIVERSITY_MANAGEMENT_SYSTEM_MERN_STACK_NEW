@@ -1,12 +1,12 @@
 const AdminData = [
     {
-        admin_first_name: "Admin FName",
-        admin_last_name: "Admin LName",
-        admin_email: "admin@admin.com",
-        admin_phone: "+910000000000",
+        admin_first_name: "Ahsan",
+        admin_last_name: "Chaudhry",
+        admin_email: "admin@gmail.com",
+        admin_phone: "+923323786747",
         admin_password: "12345678",
         status: true,
-        admin_cnic: "admin_cnic"
+        admin_cnic: "4110159307303"
     },
 ];
 

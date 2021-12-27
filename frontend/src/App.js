@@ -17,6 +17,7 @@ import AdminProfile from "./pages/Admin/Profile";
 import AdminCourses from "./pages/Admin/Courses";
 import AdminAssignTeacher from "./pages/Admin/AssignTeacher";
 import AdminAssignStudents from "./pages/Admin/AssignStudents";
+import EditTeacher from "./pages/Admin/EditTeacher";
 
 // * Teacher pages 
 import TeacherDashboard from "./pages/Teacher/Dashboard";
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/courses" element={<AdminCourses />} />
+          <Route path="/admin/edit/teacher" element={<EditTeacher />} />
 
           {/* //* Teacher  */}
           <Route path="/teacher/dashboard" element={<TeacherDashboard />} />

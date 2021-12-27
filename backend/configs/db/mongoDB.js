@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const dbPassword =
-  "mongodb+srv://MyUsername:MyPassword@mycluster.rkncu.mongodb.net/UMS?retryWrites=true&w=majority";
+  "mongodb+srv://shani:chaudhry@cluster0.bqlqg.mongodb.net/UMS?retryWrites=true&w=majority";
 
 const connectToMongoDb = async () => {
   try {

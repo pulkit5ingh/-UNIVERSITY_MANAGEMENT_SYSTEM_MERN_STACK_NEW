@@ -101,9 +101,9 @@ const AssignStudents = () => {
         )
         console.log(data)
         if (data.data.status === "success") {
-            window.location.reload(false);
+            // window.location.reload(false);
             // getAllStudents();
-            // navigate(`/admin/courses`);
+            navigate(`/admin/courses`);
         } else {
             alert(JSON.stringify(data.data.message))
         }
@@ -130,9 +130,10 @@ const AssignStudents = () => {
         if (data.data.status === "success") {
             // getCourse();
             // getAllStudents();
-            window.location.reload(false);
+            // window.location.reload(false);
             // navigate(`courses/assign-student/${id}`);
             // getAllStudents();
+            navigate(`/admin/courses`);
         } else {
             alert(JSON.stringify(data.data.message))
         }
