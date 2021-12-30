@@ -153,10 +153,12 @@ const createTeacher = asyncHandler(async (req, res) => {
 // * =========================================================== //
 
 // * @desc    Update a teacher
-// * @route   PUT /api/teacher/:id
+// * @route   PUT /api/teacher
 // * @access  Private/Admin
 const updateTeacher = asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
+
+    console.log(req.body)
 
     try {
         const data = await TeacherModel.findByIdAndUpdate({ _id: id }, req.body, {

@@ -53,7 +53,7 @@ const AllTeachersTable = () => {
                             <td>{teacher.teacher_gender}</td>
                             <td>{teacher.teacher_phone_number}</td>
                             <td>{teacher.teacher_domicile}</td>
-                            <td><button className="table-edit-btn">EDIT</button></td>
+                            <td><Link to={`/admin/edit/teacher/${teacher._id}`} className="table-edit-btn" >EDIT</Link></td>
                             <td><button className="table-delete-btn">DELETE</button></td>
                         </tr>
                     )
