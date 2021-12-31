@@ -51,7 +51,7 @@ const AllStudentsTable = () => {
                             <td>{student.student_gender}</td>
                             <td>{student.student_phone_number}</td>
                             <td>{student.student_domicile}</td>
-                            <td><button className="table-edit-btn">EDIT</button></td>
+                            <td><Link to={`/admin/edit/student/${student._id}`} className="table-edit-btn" >EDIT</Link></td>
                             <td><button className="table-delete-btn">DELETE</button></td>
                         </tr>
                     )

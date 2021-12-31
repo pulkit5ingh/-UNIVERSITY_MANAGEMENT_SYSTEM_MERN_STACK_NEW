@@ -145,8 +145,9 @@ const createStudent = asyncHandler(async (req, res) => {
 // * @route   PUT /api/students/:id
 // * @access  Private/Admin
 const updateStudent = asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
 
+    console.log(req.body)
     try {
         const data = await StudentModel.findByIdAndUpdate({ _id: id }, req.body, {
             new: true,

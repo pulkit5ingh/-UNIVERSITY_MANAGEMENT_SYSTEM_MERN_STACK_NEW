@@ -18,6 +18,7 @@ import AdminCourses from "./pages/Admin/Courses";
 import AdminAssignTeacher from "./pages/Admin/AssignTeacher";
 import AdminAssignStudents from "./pages/Admin/AssignStudents";
 import EditTeacher from "./pages/Admin/EditTeacher";
+import EditStudent from "./pages/Admin/EditStudent";
 
 // * Teacher pages 
 import TeacherDashboard from "./pages/Teacher/Dashboard";
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/courses" element={<AdminCourses />} />
           <Route path="/admin/edit/teacher/:_id" element={<EditTeacher />} />
+          <Route path="/admin/edit/student/:_id" element={<EditStudent />} />
 
           {/* //* Teacher  */}
           <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
