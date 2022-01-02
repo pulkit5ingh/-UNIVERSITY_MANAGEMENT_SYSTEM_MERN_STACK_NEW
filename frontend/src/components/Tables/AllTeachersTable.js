@@ -22,6 +22,44 @@ const AllTeachersTable = () => {
         }
     }
 
+    const deleteTeacher = async (id) => {
+
+        try {
+
+            // alert(JSON.stringify(id))
+
+            let formData = {
+                id
+            }
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const data = await axios.post(
+                'http://localhost:5000/api/delete_teacher',
+                formData,
+                config
+            )
+
+
+            console.log(data)
+            if (data.data.status === "success") {
+                alert("TEACHER DELETED SUCCESSFULLY")
+                getAllTeachers();
+            } else {
+
+            }
+
+        } catch (error) {
+            alert(error)
+        }
+
+    }
+
+
 
     useEffect(() => {
         getAllTeachers();
@@ -54,7 +92,9 @@ const AllTeachersTable = () => {
                             <td>{teacher.teacher_phone_number}</td>
                             <td>{teacher.teacher_domicile}</td>
                             <td><Link to={`/admin/edit/teacher/${teacher._id}`} className="table-edit-btn" >EDIT</Link></td>
-                            <td><button className="table-delete-btn">DELETE</button></td>
+                            <td><button className="table-delete-btn" onClick={() => {
+                                deleteTeacher(teacher._id)
+                            }} >DELETE</button></td>
                         </tr>
                     )
                 })}

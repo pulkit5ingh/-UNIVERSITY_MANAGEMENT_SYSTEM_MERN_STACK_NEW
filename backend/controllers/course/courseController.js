@@ -43,14 +43,12 @@ const getAllCourse = asyncHandler(async (req, res) => {
 const getCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
-  
-
     try {
         const data = await CourseModel.findById({ _id: req.params.id })
             .populate("course_assigned_teacher")
             .populate("course_assigned_students")
 
-   
+
 
         res.status(201).json({
             status: "success",
@@ -73,7 +71,6 @@ const getCourse = asyncHandler(async (req, res) => {
 // * @route   POST /api/student
 // * @access  Private/Admin
 const createCourse = asyncHandler(async (req, res) => {
-
 
     // * required array
     let required = [];
@@ -99,8 +96,6 @@ const createCourse = asyncHandler(async (req, res) => {
 
     // * check required fields !
     if (required.length === 0) {
-
-   
 
         const {
             student_first_name,
@@ -191,18 +186,13 @@ const pushStudentToCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { student_id } = req.body
 
-  
     try {
 
         // * Lets Check if Student is Already in array 
 
         let findStudent = await CourseModel.findOne({ _id: id });
 
-
-
         let isStudent = findStudent.course_assigned_students.includes(student_id);
-
-
 
         if (isStudent) {
             res.status(200).json({
@@ -243,8 +233,6 @@ const popStudentToCourse = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { student_id } = req.body
 
-
-
     try {
 
         const data = await CourseModel.findOneAndUpdate({ _id: id },
@@ -278,7 +266,7 @@ const popStudentToCourse = asyncHandler(async (req, res) => {
 const getStudentCourses = asyncHandler(async (req, res) => {
     const { student_id } = req.params;
 
-   
+
 
     try {
         const data = await CourseModel.find({
@@ -310,14 +298,14 @@ const getStudentCourses = asyncHandler(async (req, res) => {
 const getTeacherCourses = asyncHandler(async (req, res) => {
     const { teacher_id } = req.params;
 
- 
+
 
     try {
         const data = await CourseModel.find({
             course_assigned_teacher: teacher_id
         }).populate("course_assigned_teacher").populate("course_assigned_students")
 
-       
+
 
         res.status(201).json({
             status: "success",
@@ -357,7 +345,7 @@ const getAllCoursesByTeacherAndCourseID = asyncHandler(async (req, res) => {
 
         }).populate("course_assigned_teacher").populate("course_assigned_students")
 
-     
+
 
         res.status(201).json({
             status: "success",

@@ -30,7 +30,7 @@ router.route("/teacher").put(updateTeacher);
 
 // *=======================================================================================//
 
-router.route("/teacher/:id").delete(deleteTeacher);
+router.route("/delete_teacher").post(deleteTeacher);
 
 // *=======================================================================================//
 

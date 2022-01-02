@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import './Table.css'
 
 const AllStudentsTable = () => {
+
+    // * use navigate 
+    const navigate = useNavigate();
 
     // * Use State
     const [students, setStudents] = useState([])
@@ -19,6 +23,45 @@ const AllStudentsTable = () => {
         } catch (error) {
             alert(error)
         }
+    }
+
+
+    const deleteStudent = async (id) => {
+
+        try {
+
+            // alert(JSON.stringify(id))
+
+            let formData = {
+                id
+            }
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const data = await axios.post(
+                'http://localhost:5000/api/delete_student',
+                formData,
+                config
+            )
+
+
+            console.log(data)
+            if (data.data.status === "success") {
+                alert("STUDENT DELETED SUCCESSFULLY")
+                getAllStudents();
+                navigate("/admin/all-students");
+            } else {
+
+            }
+
+        } catch (error) {
+            alert(error)
+        }
+
     }
 
     useEffect(() => {
@@ -52,7 +95,9 @@ const AllStudentsTable = () => {
                             <td>{student.student_phone_number}</td>
                             <td>{student.student_domicile}</td>
                             <td><Link to={`/admin/edit/student/${student._id}`} className="table-edit-btn" >EDIT</Link></td>
-                            <td><button className="table-delete-btn">DELETE</button></td>
+                            <td><button className="table-delete-btn" onClick={() => {
+                                deleteStudent(student._id)
+                            }} >DELETE</button></td>
                         </tr>
                     )
                 })}

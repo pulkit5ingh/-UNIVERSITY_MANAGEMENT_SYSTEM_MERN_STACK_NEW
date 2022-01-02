@@ -1,5 +1,8 @@
 import asyncHandler from "express-async-handler";
 import TeacherModel from "../../models/teacher/teacher.js";
+import MarksModel from "../../models/marks/marks.js";
+import AttendanceModel from "../../models/attendance/attendance.js";
+import CourseModel from "../../models/course/course.js";
 import generateToken from '../../configs/jwt/generateToken.js'
 
 // * =========================================================== //
@@ -186,13 +189,20 @@ const updateTeacher = asyncHandler(async (req, res) => {
 // * @route   DELETE /api/teacher
 // * @access  Private/Admin
 const deleteTeacher = asyncHandler(async (req, res) => {
-    const teacher = await TeacherModel.findById(req.params.id);
+    const { id } = req.body;
 
-    if (teacher) {
-        await teacher.remove();
+    await MarksModel.findOneAndDelete({ teacher_id: id })
+    await AttendanceModel.findOneAndDelete({ attendance_teacher: id })
+    await CourseModel.findOneAndDelete({ course_assigned_teacher: id })
+
+    let Teacher = await TeacherModel.findOneAndDelete({ _id: id })
+
+    if (Teacher) {
+
+        console.log("Teacher DELETED SUCCESFULLY !")
         res.json({
             status: "success",
-            message: "teacher removed",
+            message: "Teacher removed",
             response: null
         });
     } else {

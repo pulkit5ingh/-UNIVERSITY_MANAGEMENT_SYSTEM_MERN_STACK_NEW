@@ -1,5 +1,8 @@
 import asyncHandler from "express-async-handler";
 import StudentModel from "../../models/student/student.js";
+import MarksModel from "../../models/marks/marks.js";
+import AttendanceModel from "../../models/attendance/attendance.js";
+import CourseModel from "../../models/course/course.js";
 import generateToken from '../../configs/jwt/generateToken.js'
 
 // * =========================================================== //
@@ -170,14 +173,34 @@ const updateStudent = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
-// * @desc    delete a student
+// * @desc    post a student
 // * @route   DELETE /api/student
 // * @access  Private/Admin
 const deleteStudent = asyncHandler(async (req, res) => {
-    const student = await StudentModel.findById(req.params.id);
+
+    const { id } = req.body;
+
+    await MarksModel.findOneAndDelete({ student_id: id })
+    await AttendanceModel.findOneAndDelete({ attendance_student: id })
+
+    let findCourse = await CourseModel.find({ course_assigned_students: id })
+
+    await Promise.all(
+        findCourse.map(async (element) => {
+
+            await CourseModel.findOneAndUpdate({ _id: element._id },
+                { $pull: { course_assigned_students: id } },
+                {
+                    new: true,
+                    runValidators: true,
+                })
+        }))
+
+    let student = await StudentModel.findOneAndDelete({ _id: id })
 
     if (student) {
-        await student.remove();
+
+        console.log("STUDENT DELETED SUCCESFULLY !")
         res.json({
             status: "success",
             message: "Student removed",
@@ -191,6 +214,7 @@ const deleteStudent = asyncHandler(async (req, res) => {
             response: null
         });
     }
+
 });
 
 // * =========================================================== //
