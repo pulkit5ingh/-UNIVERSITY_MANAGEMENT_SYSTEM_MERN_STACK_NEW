@@ -15,9 +15,9 @@ const Header = () => {
 
     return (
         <div class="header">
-            <a href="#default" class="logo">CompanyLogo</a>
+            <a style={{ marginLeft: "20%" }}></a>
+            <a><b>University of California</b></a>
             <div class="header-right">
-                {/* <a class="active" href="#home">HELLO ADMIN</a> */}
                 <button className="logout" onClick={logoutHandler}>LOG OUT</button>
                 {/* <a href="#contact">Contact</a>
                 <a href="#about">About</a> */}

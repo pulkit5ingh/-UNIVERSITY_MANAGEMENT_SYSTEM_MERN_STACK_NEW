@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import './Form.css'
 
 const TeacherCreateAttendanceForm = () => {
+
+    // * ======================== authentication
+    const navigate = useNavigate();
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
 
     const [students, setStudents] = useState([])
     const [attendances, setAttendances] = useState([])
@@ -19,7 +27,7 @@ const TeacherCreateAttendanceForm = () => {
         console.log(data)
 
         let formData = {
-            attendance_teacher: "619fbabebd201cf406570743",
+            attendance_teacher: userInfo._id,
             attendance_student: data.student_id,
             attendance_no_of_classes: data.no_of_classes,
         }
@@ -39,7 +47,7 @@ const TeacherCreateAttendanceForm = () => {
 
             console.log(data)
             if (data.data.status === "success") {
-                window.location.reload(false);
+                getAllTeacherAttendance();
             } else {
             }
 
@@ -64,7 +72,7 @@ const TeacherCreateAttendanceForm = () => {
 
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/teachers_attendance/619fbabebd201cf406570743`,
+                `http://localhost:5000/api/teachers_attendance/${userInfo._id}`,
             )
             setAttendances(data.data.response)
             setLoading(false)
@@ -88,8 +96,8 @@ const TeacherCreateAttendanceForm = () => {
                     <h4>CREATE ATTENDANCE</h4>
                     <div class="row">
                         <div class="column">
-                            <label>YEAR</label>
-                            <input type="text" value="YOUR NAME " disabled />
+                            <label>YOUR NAME</label>
+                            <input type="text" value={`${userInfo.teacher_first_name + " " + userInfo.teacher_last_name}`} disabled />
                         </div>
 
                         <div class="column">

@@ -38,7 +38,7 @@ const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
-        alert(JSON.stringify(data))
+       // alert(JSON.stringify(data))
         dispatch(login(data.admin_cnic, data.password, data.access_as))
     };
 

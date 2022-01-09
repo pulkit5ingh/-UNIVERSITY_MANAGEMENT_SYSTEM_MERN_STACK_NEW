@@ -22,7 +22,7 @@ const StudentTable = () => {
             console.log(data)
             setCourses(data.data.response)
         } catch (error) {
-            alert(error)
+           // alert(error)
         }
     }
 

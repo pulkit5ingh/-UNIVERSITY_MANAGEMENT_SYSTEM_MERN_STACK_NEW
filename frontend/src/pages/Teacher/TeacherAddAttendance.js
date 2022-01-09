@@ -18,7 +18,8 @@ const TeacherAddAttendance = () => {
 
     // * USE EFFECT REDIRECT TO LOG IN 
     useEffect(() => {
-        if (!userInfo) {
+        alert(JSON.stringify(userInfo))
+        if (!userInfo || userInfo === 'undefined') {
             navigate("/");
         }
         if (userInfo) {

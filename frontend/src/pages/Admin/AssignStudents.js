@@ -103,9 +103,10 @@ const AssignStudents = () => {
         if (data.data.status === "success") {
             // window.location.reload(false);
             // getAllStudents();
-            navigate(`/admin/courses`);
+            // navigate(`/admin/courses`);
+            getCourse();
         } else {
-            alert(JSON.stringify(data.data.message))
+            // alert(JSON.stringify(data.data.message))
         }
     }
 
@@ -133,9 +134,10 @@ const AssignStudents = () => {
             // window.location.reload(false);
             // navigate(`courses/assign-student/${id}`);
             // getAllStudents();
-            navigate(`/admin/courses`);
+            // navigate(`/admin/courses`);
+            getCourse();
         } else {
-            alert(JSON.stringify(data.data.message))
+            // alert(JSON.stringify(data.data.message))
         }
     }
 
@@ -216,7 +218,7 @@ const AssignStudents = () => {
                                     >
                                         {students.map((student, key) => {
                                             return (
-                                                <option key={key} value={student._id}>{student.student_first_name}</option>
+                                                <option key={key} value={student._id}>{student.student_first_name}{" "}{student.student_last_name}</option>
                                             )
                                         })}
                                     </select>

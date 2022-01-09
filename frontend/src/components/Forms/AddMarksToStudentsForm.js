@@ -1,10 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import './Form.css'
 
 const AddMarksToStudentsForm = () => {
+
+    // * ======================== authentication
+    const navigate = useNavigate();
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
+
+    // * USE EFFECT REDIRECT TO LOG IN 
+    useEffect(() => {
+        if (!userInfo) {
+            navigate("/");
+        }
+        if (userInfo) {
+
+            if (userInfo.is_teacher === true) {
+
+            }
+            else {
+                navigate("/");
+            }
+        }
+        else {
+            navigate("/");
+        }
+    }, [navigate, userInfo])
+
+    // * ======================== authentication
 
     const [courseid, setCourseId] = useState(null)
     const [coureses, setCourses] = useState([])
@@ -41,7 +70,7 @@ const AddMarksToStudentsForm = () => {
     const onMarksSubmit = async data => {
 
         try {
-            alert(JSON.stringify(data))
+           // alert(JSON.stringify(data))
 
             let formData = {
                 attendance_marks: data.attendance_marks,
@@ -49,7 +78,7 @@ const AddMarksToStudentsForm = () => {
                 final_marks: data.final_marks,
 
                 course_id: courseid,
-                teacher_id: "619fbabebd201cf406570743",
+                teacher_id: userInfo._id,
                 student_id: data.student_id,
             }
 
@@ -69,9 +98,10 @@ const AddMarksToStudentsForm = () => {
 
                 console.log(data)
                 if (data.data.status === "success") {
-                    window.location.reload(false);
+                    getAlMarksbyTeacherId();
+                    // window.location.reload(false);
                 } else {
-                    alert("SOMETHING WENT WRONG")
+                  //  alert("SOMETHING WENT WRONG")
                 }
 
             } catch (error) {
@@ -87,7 +117,7 @@ const AddMarksToStudentsForm = () => {
     const getAlMarksbyTeacherId = async () => {
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/marks_by_teacher/619fbabebd201cf406570743`,
+                `http://localhost:5000/api/marks_by_teacher/${userInfo._id}`,
             )
             setTeacherMarks(data.data.response)
         } catch (error) {
@@ -98,7 +128,7 @@ const AddMarksToStudentsForm = () => {
     const getAllCoursesbyTeacherId = async () => {
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/teacher_courses/619fbabebd201cf406570743`,
+                `http://localhost:5000/api/teacher_courses/${userInfo._id}`,
             )
             setCourses(data.data.response)
             console.log(courseid)
@@ -114,10 +144,10 @@ const AddMarksToStudentsForm = () => {
         try {
             console.log(courseid)
             const { data } = await axios.get(
-                `http://localhost:5000/api/course_by_teacher_and_course_id/619fbabebd201cf406570743/${courseid}`,
+                `http://localhost:5000/api/course_by_teacher_and_course_id/${userInfo._id}/${courseid}`,
             )
 
-            if (data.status == "success") {
+            if (data.status === "success") {
                 let students = [];
                 data.response.forEach(element => {
 
@@ -150,8 +180,8 @@ const AddMarksToStudentsForm = () => {
                     <h4>ADD MARKS</h4>
                     <div class="row">
                         <div class="column">
-                            <label>YEAR</label>
-                            <input type="text" value="YOUR NAME " disabled />
+                            <label>YOUR NAME</label>
+                            <input type="text" value={`${userInfo.teacher_first_name + " " + userInfo.teacher_last_name}`} disabled />
                         </div>
 
                         <div class="column">

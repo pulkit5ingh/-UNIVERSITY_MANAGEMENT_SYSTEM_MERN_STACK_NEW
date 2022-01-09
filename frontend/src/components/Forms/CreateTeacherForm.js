@@ -53,7 +53,7 @@ const CreateTeacherForm = () => {
                 navigate("/admin/all-teachers");
             } else {
 
-                alert(JSON.stringify(data.data.message))
+               // alert(JSON.stringify(data.data.message))
             }
 
         } catch (error) {

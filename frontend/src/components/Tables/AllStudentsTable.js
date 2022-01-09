@@ -21,7 +21,7 @@ const AllStudentsTable = () => {
             console.log(students)
             setStudents(data.data.response)
         } catch (error) {
-            alert(error)
+           // alert(error)
         }
     }
 

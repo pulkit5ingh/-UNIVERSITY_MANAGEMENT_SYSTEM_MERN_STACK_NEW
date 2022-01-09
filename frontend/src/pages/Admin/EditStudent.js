@@ -41,7 +41,7 @@ const EditStudent = () => {
             })
             setLoading(false)
         } catch (error) {
-            alert(error)
+           //  alert(error)
         }
     }
 
@@ -76,7 +76,7 @@ const EditStudent = () => {
             student_password: data.student_password
         }
 
-        alert(JSON.stringify(data))
+        // alert(JSON.stringify(data))
 
         try {
 
@@ -96,11 +96,11 @@ const EditStudent = () => {
             if (data.data.status === "success") {
                 navigate("/admin/all-students");
             } else {
-                alert(JSON.stringify(data.data.message))
+               // alert(JSON.stringify(data.data.message))
             }
 
         } catch (error) {
-            alert(error)
+          //  alert(error)
         }
     };
 

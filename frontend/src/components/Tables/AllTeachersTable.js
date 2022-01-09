@@ -18,7 +18,7 @@ const AllTeachersTable = () => {
             console.log(data)
             setTeachers(data.data.response)
         } catch (error) {
-            alert(error)
+           // alert(error)
         }
     }
 
@@ -54,7 +54,7 @@ const AllTeachersTable = () => {
             }
 
         } catch (error) {
-            alert(error)
+           // alert(error)
         }
 
     }

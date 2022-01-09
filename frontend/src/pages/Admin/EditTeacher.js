@@ -41,7 +41,7 @@ const EditTeacher = () => {
             })
             setLoading(false)
         } catch (error) {
-            alert(error)
+           //  alert(error)
         }
     }
 
@@ -78,7 +78,7 @@ const EditTeacher = () => {
             teacher_cgpa: data.teacher_cgpa,
         }
 
-        alert(JSON.stringify(data))
+        // alert(JSON.stringify(data))
 
         try {
 
@@ -98,11 +98,11 @@ const EditTeacher = () => {
             if (data.data.status === "success") {
                 navigate("/admin/all-teachers");
             } else {
-                alert(JSON.stringify(data.data.message))
+               // alert(JSON.stringify(data.data.message))
             }
 
         } catch (error) {
-            alert(error)
+           // alert(error)
         }
     };
 
