@@ -35,6 +35,7 @@ const StudentMarksTable = () => {
                     <th>Attendance Marks</th>
                     <th>Mid Term Marks</th>
                     <th>Final Term Marks</th>
+                    <th>Total Marks</th>
                 </tr>
                 {studentMarks.map((studentMark, key) => {
                     return (
@@ -45,6 +46,7 @@ const StudentMarksTable = () => {
                             <td>{studentMark.attendance_marks}</td>
                             <td>{studentMark.midterm_marks}</td>
                             <td>{studentMark.final_marks}</td>
+                            <td>{studentMark.attendance_marks + studentMark.midterm_marks + studentMark.final_marks} </td>
                         </tr>
                     )
                 })}
