@@ -14,27 +14,6 @@ const AddMarksToStudentsForm = () => {
     const adminLogin = useSelector((state) => state.adminLogin)
     const { error, userInfo, message } = adminLogin;
 
-    // * USE EFFECT REDIRECT TO LOG IN 
-    useEffect(() => {
-        if (!userInfo) {
-            navigate("/");
-        }
-        if (userInfo) {
-
-            if (userInfo.is_teacher === true) {
-
-            }
-            else {
-                navigate("/");
-            }
-        }
-        else {
-            navigate("/");
-        }
-    }, [navigate, userInfo])
-
-    // * ======================== authentication
-
     const [courseid, setCourseId] = useState(null)
     const [coureses, setCourses] = useState([])
     const [teacherMarks, setTeacherMarks] = useState([])

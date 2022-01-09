@@ -14,12 +14,12 @@ const TeacherAddAttendance = () => {
     const adminLogin = useSelector((state) => state.adminLogin)
     const { loading, error, userInfo, message } = adminLogin;
 
-    alert(JSON.stringify(userInfo))
+    // alert(JSON.stringify(userInfo))
 
     // * USE EFFECT REDIRECT TO LOG IN 
     useEffect(() => {
-        alert(JSON.stringify(userInfo))
-        if (!userInfo || userInfo === 'undefined') {
+        // alert(JSON.stringify(userInfo))
+        if (!userInfo) {
             navigate("/");
         }
         if (userInfo) {

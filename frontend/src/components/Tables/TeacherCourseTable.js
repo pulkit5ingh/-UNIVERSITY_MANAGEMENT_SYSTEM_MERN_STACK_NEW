@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import './Table.css'
 
 const TeacherCourseTable = () => {
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
 
     // * Use State
     const [coureses, setCourses] = useState([])
@@ -17,7 +22,7 @@ const TeacherCourseTable = () => {
         try {
             const data = await axios.get(
                 // `http://localhost:5000/api/teacher_courses${id}`,
-                `http://localhost:5000/api/teacher_courses/619fbabebd201cf406570743`,
+                `http://localhost:5000/api/teacher_courses/${userInfo._id}`,
             )
             console.log(data)
             setCourses(data.data.response)

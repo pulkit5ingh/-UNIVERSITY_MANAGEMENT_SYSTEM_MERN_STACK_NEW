@@ -13,7 +13,7 @@ const Dashboard = () => {
     const adminLogin = useSelector((state) => state.adminLogin)
     const { loading, error, userInfo, message } = adminLogin;
 
-    alert(JSON.stringify(userInfo))
+    // alert(JSON.stringify(userInfo))
 
     // * USE EFFECT REDIRECT TO LOG IN 
     useEffect(() => {
