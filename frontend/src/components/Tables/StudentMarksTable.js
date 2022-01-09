@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 const StudentMarksTable = () => {
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
+
     const [studentMarks, setStudentMarks] = useState([])
 
     // * Get All Students
     const getAlMarksbyStudentId = async () => {
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/marks_by_student/619d30c606e2a9aac05afb69`,
+                `http://localhost:5000/api/marks_by_student/${userInfo._id}`,
             )
             setStudentMarks(data.data.response)
         } catch (error) {

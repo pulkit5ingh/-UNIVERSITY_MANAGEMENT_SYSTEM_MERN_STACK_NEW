@@ -20,12 +20,12 @@ export const login = (cnic, password, access_as) => async (dispatch) => {
             },
         }
 
-        alert(cnic, password, access_as)
+        // alert(cnic, password, access_as)
 
         // * check access as
         if (access_as === "admin") {
 
-            alert("ADMIN LOGIN")
+            // alert("ADMIN LOGIN")
 
             const { data } = await axios.post(
                 'http://localhost:5000/api/admin/login',
@@ -49,14 +49,14 @@ export const login = (cnic, password, access_as) => async (dispatch) => {
                 })
             }
         } else if (access_as === "teacher") {
-            alert("TEACHER LOGIN API CALL")
+            // alert("TEACHER LOGIN API CALL")
             const { data } = await axios.post(
                 'http://localhost:5000/api/teacher/login',
                 { teacher_cnic: cnic, teacher_password: password },
                 config
             )
 
-            alert(JSON.stringify(data))
+            // alert(JSON.stringify(data))
 
             if (data.status === "success") {
                 dispatch({
@@ -75,14 +75,14 @@ export const login = (cnic, password, access_as) => async (dispatch) => {
 
             }
         } else if (access_as === "student") {
-            alert("STUDENT LOGIN API CALL")
+            // alert("STUDENT LOGIN API CALL")
             const { data } = await axios.post(
                 'http://localhost:5000/api/student/login',
                 { student_cnic: cnic, student_password: password },
                 config
             )
 
-            alert(JSON.stringify(data))
+            // alert(JSON.stringify(data))
 
             if (data.status === "success") {
                 dispatch({

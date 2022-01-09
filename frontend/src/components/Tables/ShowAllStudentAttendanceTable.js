@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 const ShowAllStudentAttendanceTable = () => {
+
+    // * ==== get user state 
+    const adminLogin = useSelector((state) => state.adminLogin)
+    const { error, userInfo, message } = adminLogin;
 
     const [attendances, setAttendances] = useState([])
     const [loading, setLoading] = useState(true)
@@ -13,7 +18,7 @@ const ShowAllStudentAttendanceTable = () => {
 
         try {
             const data = await axios.get(
-                `http://localhost:5000/api/students_attendance/619d30c606e2a9aac05afb62`,
+                `http://localhost:5000/api/students_attendance/${userInfo._id}`,
             )
             setAttendances(data.data.response)
             setLoading(false)
