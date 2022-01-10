@@ -29,7 +29,9 @@ const CreateStudentForm = () => {
             student_gender: data.gender,
             student_phone_number: data.phone_number,
             student_domicile: data.domicile,
-            student_password: data.password
+            student_password: data.password,
+            student_department: data.department,
+            student_semester: data.semester,
         }
 
         try {
@@ -112,6 +114,21 @@ const CreateStudentForm = () => {
                     {...register("password", { required: true })}
                 />
                 <div className="error">{errors.password && <span>This field is required</span>}</div>
+
+                {/* //* SEMESTER */}
+                <label>SEMESTER</label>
+                <select name="semester"
+                    {...register("semester")}
+                >
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                    <option value="4th">4th</option>
+                    <option value="5th">5th</option>
+                    <option value="6th">6th</option>
+                    <option value="7th">7th</option>
+                    <option value="8th">8th</option>
+                </select>
 
                 {/* //* GENDER */}
                 <label>GENDER</label>

@@ -81,6 +81,7 @@ const AllStudentsTable = () => {
                     <th>gender</th>
                     <th>phone number</th>
                     <th>domicile</th>
+                    <th>semester</th>
                     <th>EDIT</th>
                     <th>DELETE</th>
                 </tr>
@@ -94,6 +95,7 @@ const AllStudentsTable = () => {
                             <td>{student.student_gender}</td>
                             <td>{student.student_phone_number}</td>
                             <td>{student.student_domicile}</td>
+                            <td>{student.student_semester}</td>
                             <td><Link to={`/admin/edit/student/${student._id}`} className="table-edit-btn" >EDIT</Link></td>
                             <td><button className="table-delete-btn" onClick={() => {
                                 deleteStudent(student._id)

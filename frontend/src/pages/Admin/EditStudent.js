@@ -41,7 +41,7 @@ const EditStudent = () => {
             })
             setLoading(false)
         } catch (error) {
-           //  alert(error)
+            //  alert(error)
         }
     }
 
@@ -73,7 +73,8 @@ const EditStudent = () => {
             student_phone_number: data.student_phone_number,
             student_domicile: data.student_domicile,
             student_inter_marks: data.student_inter_marks,
-            student_password: data.student_password
+            student_password: data.student_password,
+            student_semester: data.semester
         }
 
         // alert(JSON.stringify(data))
@@ -96,11 +97,11 @@ const EditStudent = () => {
             if (data.data.status === "success") {
                 navigate("/admin/all-students");
             } else {
-               // alert(JSON.stringify(data.data.message))
+                // alert(JSON.stringify(data.data.message))
             }
 
         } catch (error) {
-          //  alert(error)
+            //  alert(error)
         }
     };
 
@@ -158,7 +159,7 @@ const EditStudent = () => {
                             defaultValue={student.student_phone_number}
                         />
                         <div className="error">{errors.phone_number && <span>This field is required</span>}</div>
-                        
+
                         {/* //* CGPA */}
                         {/* <label>CGPA</label>
                     <input type="text" name="cgpa"
@@ -194,6 +195,20 @@ const EditStudent = () => {
                         />
                         <div className="error">{errors.student_password && <span>This field is required</span>}</div>
 
+                        {/* //* SEMESTER */}
+                        <label>SEMESTER</label>
+                        <select name="semester"
+                            {...register("semester")}
+                        >
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                        </select>
 
                         {/* //* GENDER */}
                         <label>GENDER</label>

@@ -54,6 +54,10 @@ const Profile = () => {
                             {"    "}
                             {userInfo != null && userInfo.student_email}
                         </p>
+                        <p><b>STUDENT SEMESTER</b> :
+                            {"    "}
+                            {userInfo != null && userInfo.student_semester}
+                        </p>                        
                     </div>
                 </div>
             </div>

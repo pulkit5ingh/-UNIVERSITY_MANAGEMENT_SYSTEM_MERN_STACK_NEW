@@ -55,6 +55,13 @@ const studentSchema = new mongoose.Schema(
         },
 
         // * ok
+        student_semester: {
+            type: String,
+            required: true,
+            default: null
+        },
+
+        // * ok
         student_password: {
             type: String,
             required: true,

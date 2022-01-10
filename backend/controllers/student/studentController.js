@@ -62,7 +62,6 @@ const getStudent = asyncHandler(async (req, res) => {
 // * @access  Private/Admin
 const createStudent = asyncHandler(async (req, res) => {
 
-
     // * required array
     let required = [];
 
@@ -84,6 +83,8 @@ const createStudent = asyncHandler(async (req, res) => {
         required.push("student_domicile");
     if (!req.body.student_password)
         required.push("student_password");
+    if (!req.body.student_semester)
+        required.push("student_semester");
 
     // * check required fields !
     if (required.length === 0) {
@@ -100,6 +101,7 @@ const createStudent = asyncHandler(async (req, res) => {
             student_phone_number,
             student_domicile,
             student_password,
+            student_semester,
         } = req.body;
 
         try {
@@ -113,6 +115,7 @@ const createStudent = asyncHandler(async (req, res) => {
                 student_phone_number,
                 student_domicile,
                 student_password,
+                student_semester,
             });
 
             const data = await newStudentModel.save();
@@ -250,6 +253,7 @@ const authStudent = asyncHandler(async (req, res) => {
                     student_last_name: student.student_last_name,
                     student_email: student.student_email,
                     student_cnic: student.student_cnic,
+                    student_semester: student.student_semester,
                     is_admin: false,
                     is_student: true,
                     token: generateToken(student._id),
