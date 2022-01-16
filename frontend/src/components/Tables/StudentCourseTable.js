@@ -52,7 +52,18 @@ const StudentTable = () => {
                             <td>{course.course_desc}</td>
                             <td>{course.course_year}</td>
                             <td>{course.course_semester}</td>
-                            <td>{course.course_assigned_teacher.teacher_first_name}</td>
+
+                            {course.course_assigned_teacher ? (
+                                <td>
+                                    {course.course_assigned_teacher.teacher_first_name}
+                                </td>
+                            ) : (
+                                <td>NO TEACHER</td>
+                            )}
+                            <td>
+                                {/* {course.course_assigned_teacher.teacher_first_name} */}
+
+                            </td> 
                         </tr>
                     )
                 })}

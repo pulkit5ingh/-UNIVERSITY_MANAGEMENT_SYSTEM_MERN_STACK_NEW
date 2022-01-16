@@ -163,7 +163,7 @@ const AssignTeacher = () => {
                                     >
                                         {teachers.map((teacher, key) => {
                                             return (
-                                                <option key={key} value={teacher._id}>{teacher.teacher_first_name}</option>
+                                                <option key={key} value={teacher._id}>{teacher.teacher_first_name + " " + teacher.teacher_last_name}</option>
                                             )
                                         })}
                                     </select>

@@ -21,7 +21,10 @@ const Header = () => {
             <i class="fas fa-university"></i>
             </a>
             <div class="header-right">
-                <button className="logout" onClick={logoutHandler}>LOG OUT</button>
+                <button className="logout" onClick={logoutHandler}>LOG OUT
+                {"    "}
+                <i class="fas fa-sign-out-alt"></i>
+                </button>
                 {/* <a href="#contact">Contact</a>
                 <a href="#about">About</a> */}
             </div>

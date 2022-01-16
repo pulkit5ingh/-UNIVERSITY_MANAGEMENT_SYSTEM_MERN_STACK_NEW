@@ -45,33 +45,30 @@ const Dashboard = () => {
                 <div class="row">
                     <div class="column">
                         <div class="card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                            <p>Some text</p>
+                            <h3><i class="fas fa-user fa-3x"></i></h3>
+                            <p><b></b></p>
+                            <p><b> ADMIN SHOW PROFILE DETAILS</b></p>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card">
-                            <h3>Card 2</h3>
-                            <p>Some text</p>
-                            <p>Some text</p>
+                            <h3><i class="fas fa-user-graduate fa-3x"></i></h3>
+                            <p><b>ADMIN CREATE READ UPDATE DELETE STUDENTS</b></p>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card">
-                            <h3>Card 3</h3>
-                            <p>Some text</p>
-                            <p>Some text</p>
+                            <h3><i class="fas fa-chalkboard-teacher fa-3x"></i></h3>
+                            <p><b>ADMIN CREATE READ UPDATE DELETE TEACHER</b></p>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card">
-                            <h3>Card 4</h3>
-                            <p>Some text</p>
-                            <p>Some text</p>
+                            <h3><i class="fas fa-book fa-3x"></i></h3>
+                            <p><b>ADMIN ASSIGN STUDENTS AND TACHERS TO THE AVAILABLE COURSES</b></p>
                         </div>
                     </div>
                 </div>
