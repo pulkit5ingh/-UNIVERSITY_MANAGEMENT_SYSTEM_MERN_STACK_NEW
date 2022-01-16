@@ -34,6 +34,9 @@ import StudentCourses from "./pages/Student/StudentCourses";
 import StudentAttendanceTable from "./pages/Student/StudentAttendanceTable";
 import StudentMarks from "./pages/Student/StudentMarks";
 
+// * Add Student Portal
+import StudentRestrationForm from './pages/StudentRestrationForm'
+
 const App = () => {
   return (
     <>
@@ -68,6 +71,9 @@ const App = () => {
           <Route path="/student/courses" element={<StudentCourses />} />
           <Route path="/student/attendance" element={<StudentAttendanceTable />} />
           <Route path="/student/marks" element={<StudentMarks />} />
+
+          {/* //* user registration  Portal */}
+          <Route path="/student-registration-portal" element={<StudentRestrationForm />} />
 
         </Route>
       </Routes>

@@ -6,7 +6,7 @@ const StudentSideBar = () => {
     return (
         <header class="sidebar-header" role="banner">
             <h1 class="logo">
-                <a>Hello <span>STUDENT</span></a>
+                <a><b>Hello STUDENT</b></a>
             </h1>
             <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">

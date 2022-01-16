@@ -26,11 +26,11 @@
   top: 0;
   bottom: 0;
   width: 14.5em;
-  background: #666666;
+  background: #383838;
 }
 
 .logo {
-  text-transform: lowercase;
+  text-transform: uppercase;
   font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;
   padding: 0;
@@ -40,7 +40,7 @@
   display: block;
   padding: 1.65rem 0;
   font-size: 1.2rem;
-  color: #dfdbd9;
+  color: #ffffff;
   text-decoration: none;
 }
 /* .logo a:hover {
@@ -64,12 +64,13 @@
   text-align: center;
 }
 .main-nav li:hover {
-  background: #3f3f3f;
+  background: #000000;
 }
 .main-nav a {
-  font-size: 1.2rem;
-  color: #dfdbd9;
+  font-size: 1.0rem;
+  color: #ffffff;
   font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;
-  text-transform: lowercase;
+  text-transform: uppercase;
+  font-weight: 800;
 }

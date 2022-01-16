@@ -7,7 +7,9 @@ import {
     createMarks,
     getAllMarks,
     getMarksByTeacher,
-    getMarksByStudent
+    getMarksByStudent,
+    deleteMarks,
+    updateMarks
 } from "../../controllers/marks/marksController.js";
 
 // *=======================================================================================//
@@ -25,6 +27,14 @@ router.route("/marks_by_teacher/:teacher_id").get(getMarksByTeacher);
 // * =======================================================================================//
 
 router.route("/marks_by_student/:student_id").get(getMarksByStudent);
+
+// * =======================================================================================//
+
+router.route("/delete_marks").post(deleteMarks);
+
+// * =======================================================================================//
+
+router.route("/update_marks").put(updateMarks);
 
 // * =======================================================================================//
 

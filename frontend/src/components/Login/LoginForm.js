@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import { login } from '../../redux/actions/adminAction'
-import './LoginForm.css'
+import './NewLoginPage.css'
 
 const LoginForm = () => {
 
@@ -38,7 +38,7 @@ const LoginForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
-       // alert(JSON.stringify(data))
+        // alert(JSON.stringify(data))
         dispatch(login(data.admin_cnic, data.password, data.access_as))
     };
 
@@ -46,9 +46,9 @@ const LoginForm = () => {
 
 
     return (
-        <div className="container">
-            <h1><b>LOG IN</b></h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+            <form className="login-form-container" onSubmit={handleSubmit(onSubmit)}>
+                <h1><b>LOG IN</b></h1>
                 <label for="fname">CNIC</label>
                 <input type="text" name="admin_cnic" placeholder="Your cnic ..."
                     {...register("admin_cnic", { required: true })}
@@ -75,7 +75,14 @@ const LoginForm = () => {
                     <div className="error-alert">IN CORRECT CREDENTIALS !</div>
                 </> : <></>}
 
+
+                <Link to="/student-registration-portal">
+                    <button className='btn btn-warning' style={{ margin: "2% 0", padding: "2%", color: "white", border: "none", background: "tomato", cursor: "pointer", fontSize: "15px", width: "100%" }}>
+                        <b>STUDENT REGISTRATION PORTAL</b>
+                    </button>
+                </Link>
             </form>
+
         </div>
     )
 }

@@ -1,0 +1,25 @@
+.login-bg {
+    /* The image used */
+    background-image: url("../assets/uoc-bg.jpg");
+
+    /* Full height */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 0%;
+
+}
+
+.student-regostration-portal-form-container {
+    border-radius: 5px;
+    background-color: #e0e0e0e5;
+    padding: 20px;
+    width: 50%;
+    margin: 2% auto;
+}

@@ -16,7 +16,10 @@ const Header = () => {
     return (
         <div class="header">
             <a style={{ marginLeft: "20%" }}></a>
-            <a><b>University of California</b></a>
+            <a><b>University of California</b>
+            {" "}
+            <i class="fas fa-university"></i>
+            </a>
             <div class="header-right">
                 <button className="logout" onClick={logoutHandler}>LOG OUT</button>
                 {/* <a href="#contact">Contact</a>

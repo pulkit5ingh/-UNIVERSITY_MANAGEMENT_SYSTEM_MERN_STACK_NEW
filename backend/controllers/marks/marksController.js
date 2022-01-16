@@ -189,11 +189,69 @@ const getMarksByStudent = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    delete a teacher
+// * @route   DELETE /api/teacher
+// * @access  Private/Admin
+const deleteMarks = asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    let Marks = await MarksModel.findOneAndDelete({ _id: id })
+
+    if (Marks) {
+
+        console.log("Marks DELETED SUCCESFULLY !")
+        res.json({
+            status: "success",
+            message: "Marks removed",
+            response: null
+        });
+    } else {
+        res.status(404);
+        res.json({
+            status: "fail",
+            message: "something went wrong",
+            response: null
+        });
+    }
+});
+
+// * =========================================================== //
+
+// * @desc    delete a teacher
+// * @route   DELETE /api/teacher
+// * @access  Private/Admin
+const updateMarks = asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    let Marks = await MarksModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+
+    if (Marks) {
+
+        console.log("Marks Updated SUCCESFULLY !")
+        res.json({
+            status: "success",
+            message: "Marks Updated",
+            response: null
+        });
+    } else {
+        res.status(404);
+        res.json({
+            status: "fail",
+            message: "something went wrong",
+            response: null
+        });
+    }
+});
+
+// * =========================================================== //
+
 export {
     getAllMarks,
     createMarks,
     getMarksByTeacher,
-    getMarksByStudent
+    getMarksByStudent,
+    deleteMarks,
+    updateMarks
 };
 
 // * =========================================================== //

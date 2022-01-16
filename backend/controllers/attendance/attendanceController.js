@@ -128,10 +128,68 @@ const createAttendance = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    delete a teacher
+// * @route   DELETE /api/teacher
+// * @access  Private/Admin
+const deleteAttendance = asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    let Attendance = await AttendanceModel.findOneAndDelete({ _id: id })
+
+    if (Attendance) {
+
+        console.log("Attendance DELETED SUCCESFULLY !")
+        res.json({
+            status: "success",
+            message: "Attendance removed",
+            response: null
+        });
+    } else {
+        res.status(404);
+        res.json({
+            status: "fail",
+            message: "something went wrong",
+            response: null
+        });
+    }
+});
+
+// * =========================================================== //
+
+// * @desc    delete a teacher
+// * @route   DELETE /api/teacher
+// * @access  Private/Admin
+const updateAttendance = asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    let Attendance = await AttendanceModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+
+    if (Attendance) {
+
+        console.log("Attendance Updated SUCCESFULLY !")
+        res.json({
+            status: "success",
+            message: "Attendance Updated",
+            response: null
+        });
+    } else {
+        res.status(404);
+        res.json({
+            status: "fail",
+            message: "something went wrong",
+            response: null
+        });
+    }
+});
+
+// * =========================================================== //
+
 export {
     getAllTeacherAttendance,
     getAllStudentAttendance,
     createAttendance,
+    deleteAttendance,
+    updateAttendance
 };
 
 // * =========================================================== //

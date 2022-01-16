@@ -6,7 +6,7 @@ const TeacherSideBar = () => {
     return (
         <header class="sidebar-header" role="banner">
             <h1 class="logo">
-                <a>Hello <span>TEACHER</span></a>
+                <a><b>Hello TEACHER</b></a>
             </h1>
             <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
