@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import './Form.css'
@@ -81,6 +81,43 @@ const TeacherCreateAttendanceForm = () => {
         }
     }
 
+    // * Delete Attendance
+
+    const deleteAttendance = async (id) => {
+
+        try {
+
+            // alert(JSON.stringify(id))
+            let formData = {
+                id
+            }
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const data = await axios.post(
+                'http://localhost:5000/api/delete_attendance',
+                formData,
+                config
+            )
+
+
+            console.log(data)
+            if (data.data.status === "success") {
+                alert("ATTENDANCE DELETED SUCCESSFULLY")
+                getAllTeacherAttendance();
+                navigate("/teacher/add-attendance");
+            } else {
+
+            }
+
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     useEffect(() => {
         getAllStudents();
@@ -137,10 +174,12 @@ const TeacherCreateAttendanceForm = () => {
                 <>
                     <table>
                         <tr>
-                            <th>teacher Name</th>
-                            <th>student name</th>
-                            <th>no of classes</th>
-                            <th>date</th>
+                            <th>Teacher Name</th>
+                            <th>Student Name</th>
+                            <th>No Of Classes</th>
+                            <th>DATE</th>
+                            <th>EDIT</th>
+                            <th>DELETE</th>
                         </tr>
                         {attendances.map((attendance, key) => {
                             return (
@@ -148,14 +187,17 @@ const TeacherCreateAttendanceForm = () => {
                                     <td>{attendance.attendance_teacher.teacher_first_name}</td>
                                     <td>{attendance.attendance_student.student_first_name}</td>
                                     <td>{attendance.attendance_no_of_classes}</td>
-                                    <td>{attendance.createdAt}</td>
+                                    <td>{attendance.createdAt.toLocaleString()}</td>
+                                    <td><Link to={`/teacher/edit/attendance/${attendance._id}`} className="table-edit-btn" >EDIT</Link></td>
+                                    <td><button className="table-delete-btn" onClick={() => {
+                                        deleteAttendance(attendance._id)
+                                    }} >DELETE</button></td>
                                 </tr>
                             )
                         })}
                     </table>
                 </>
             }
-
         </div>
     )
 }

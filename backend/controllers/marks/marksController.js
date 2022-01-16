@@ -28,6 +28,40 @@ const getAllMarks = asyncHandler(async (req, res) => {
 
 // * =========================================================== //
 
+// * @desc    Fetch single student
+// * @route   GET /api/student
+// * @access  Public
+const getMarks = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    console.log(id)
+
+    try {
+        const data = await MarksModel.findById({ _id: req.params.id })
+            .populate("teacher_id")
+            .populate("student_id")
+            .populate("course_id")
+            .sort("-createdAt")
+
+        console.log(data)
+
+        res.status(201).json({
+            status: "success",
+            message: "course",
+            response: data,
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "course not found",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
 // * @desc    Create a student
 // * @route   POST /api/student
 // * @access  Private/Admin
@@ -251,7 +285,8 @@ export {
     getMarksByTeacher,
     getMarksByStudent,
     deleteMarks,
-    updateMarks
+    updateMarks,
+    getMarks
 };
 
 // * =========================================================== //

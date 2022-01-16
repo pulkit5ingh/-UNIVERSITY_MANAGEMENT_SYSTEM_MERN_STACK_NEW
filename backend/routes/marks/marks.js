@@ -9,12 +9,17 @@ import {
     getMarksByTeacher,
     getMarksByStudent,
     deleteMarks,
-    updateMarks
+    updateMarks,
+    getMarks
 } from "../../controllers/marks/marksController.js";
 
 // *=======================================================================================//
 
 router.route("/marks").post(createMarks);
+
+// * =======================================================================================//
+
+router.route("/marks/:id").get(getMarks);
 
 // * =======================================================================================//
 

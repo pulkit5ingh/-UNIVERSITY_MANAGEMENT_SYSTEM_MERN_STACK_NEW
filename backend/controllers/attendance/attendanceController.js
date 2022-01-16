@@ -35,6 +35,37 @@ const getAllTeacherAttendance = asyncHandler(async (req, res) => {
 // * @desc    Fetch single student
 // * @route   GET /api/student
 // * @access  Public
+const getAttendance = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    console.log(id)
+
+    try {
+        const data = await AttendanceModel.findById({ _id: req.params.id })
+            .populate("attendance_student")
+            .populate("attendance_teacher")
+            .sort("-createdAt")
+
+        res.status(201).json({
+            status: "success",
+            message: "course",
+            response: data,
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            status: "fail",
+            message: "course not found",
+            response: error,
+        });
+    }
+});
+
+// * =========================================================== //
+
+// * @desc    Fetch single student
+// * @route   GET /api/student
+// * @access  Public
 const getAllStudentAttendance = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
@@ -189,7 +220,8 @@ export {
     getAllStudentAttendance,
     createAttendance,
     deleteAttendance,
-    updateAttendance
+    updateAttendance,
+    getAttendance
 };
 
 // * =========================================================== //

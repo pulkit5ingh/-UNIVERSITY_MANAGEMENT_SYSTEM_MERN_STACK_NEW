@@ -8,12 +8,17 @@ import {
     getAllStudentAttendance,
     createAttendance,
     deleteAttendance,
-    updateAttendance
+    updateAttendance,
+    getAttendance
 } from "../../controllers/attendance/attendanceController.js";
 
 // *=======================================================================================//
 
 router.route("/attendance").post(createAttendance);
+
+// * =======================================================================================//
+
+router.route("/attendance/:id").get(getAttendance);
 
 // * =======================================================================================//
 

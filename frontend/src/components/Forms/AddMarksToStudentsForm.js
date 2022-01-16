@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import './Form.css'
@@ -49,7 +49,7 @@ const AddMarksToStudentsForm = () => {
     const onMarksSubmit = async data => {
 
         try {
-           // alert(JSON.stringify(data))
+            // alert(JSON.stringify(data))
 
             let formData = {
                 attendance_marks: data.attendance_marks,
@@ -80,7 +80,7 @@ const AddMarksToStudentsForm = () => {
                     getAlMarksbyTeacherId();
                     // window.location.reload(false);
                 } else {
-                  //  alert("SOMETHING WENT WRONG")
+                    //  alert("SOMETHING WENT WRONG")
                 }
 
             } catch (error) {
@@ -142,6 +142,45 @@ const AddMarksToStudentsForm = () => {
         } catch (error) {
             // alert(error)
         }
+    }
+
+    // * Delete Marks
+
+    const deleteMarks = async (id) => {
+
+        try {
+
+            // alert(JSON.stringify(id))
+            let formData = {
+                id
+            }
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            const data = await axios.post(
+                'http://localhost:5000/api/delete_marks',
+                formData,
+                config
+            )
+
+
+            console.log(data)
+            if (data.data.status === "success") {
+                alert("MARKS DELETED SUCCESSFULLY")
+                getAlMarksbyTeacherId();
+                navigate("/teacher/add-marks");
+            } else {
+
+            }
+
+        } catch (error) {
+            alert(error)
+        }
+
     }
 
     useEffect(() => {
@@ -236,6 +275,8 @@ const AddMarksToStudentsForm = () => {
                     <th>Attendance Marks</th>
                     <th>Mid Term Marks</th>
                     <th>Final Term Marks</th>
+                    <th>EDIT</th>
+                    <th>DELETE</th>
                 </tr>
                 {teacherMarks.map((teacherMark, key) => {
                     return (
@@ -246,6 +287,10 @@ const AddMarksToStudentsForm = () => {
                             <td>{teacherMark.attendance_marks}</td>
                             <td>{teacherMark.midterm_marks}</td>
                             <td>{teacherMark.final_marks}</td>
+                            <td><Link to={`/teacher/edit/marks/${teacherMark._id}`} className="table-edit-btn" >EDIT</Link></td>
+                            <td><button className="table-delete-btn" onClick={() => {
+                                deleteMarks(teacherMark._id)
+                            }} >DELETE</button></td>
                         </tr>
                     )
                 })}

@@ -26,6 +26,8 @@ import TeacherProfile from "./pages/Teacher/Profile";
 import TeacherCourses from "./pages/Teacher/TeacherCourses";
 import TeacherAddAttendance from "./pages/Teacher/TeacherAddAttendance";
 import AddMarks from "./pages/Teacher/AddMarks";
+import TeacherEditAttendance from "./pages/Teacher/TeacherEditAttendance";
+import TeacherEditMarks from "./pages/Teacher/TeacherEditMarks";
 
 // * Student Pages
 import StudentDashboard from "./pages/Student/Dashboard";
@@ -64,6 +66,8 @@ const App = () => {
           <Route path="/teacher/courses" element={<TeacherCourses />} />
           <Route path="/teacher/add-attendance" element={<TeacherAddAttendance />} />
           <Route path="/teacher/add-marks" element={<AddMarks />} />
+          <Route path="/teacher/edit/attendance/:_id" element={<TeacherEditAttendance />} />
+          <Route path="/teacher/edit/marks/:_id" element={<TeacherEditMarks />} />
 
           {/* //* Student  */}
           <Route path="/student/dashboard" element={<StudentDashboard />} />
